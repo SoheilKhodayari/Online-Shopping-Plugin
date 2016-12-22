@@ -1,0 +1,6 @@
+c:\users\soheil\documents\visual studio 2013\Projects\OnlineShopping\bin\Debug\OnlineShopping.exe.config
+c:\users\soheil\documents\visual studio 2013\Projects\OnlineShopping\obj\Debug\OnlineShopping.csprojResolveAssemblyReference.cache
+c:\users\soheil\documents\visual studio 2013\Projects\OnlineShopping\bin\Debug\OnlineShopping.exe
+c:\users\soheil\documents\visual studio 2013\Projects\OnlineShopping\bin\Debug\OnlineShopping.pdb
+c:\users\soheil\documents\visual studio 2013\Projects\OnlineShopping\obj\Debug\OnlineShopping.exe
+c:\users\soheil\documents\visual studio 2013\Projects\OnlineShopping\obj\Debug\OnlineShopping.pdb
