@@ -12,7 +12,7 @@ namespace OnlineShopping
         private string _FirstName;
         private string _LastName;
         private string _EmailAddress;
-        private string _Address;
+        private string _DeliveryAddress;
         private string _Phone;
 
         public CustomerDetails(string id, string firstName, string lastName)
@@ -27,7 +27,7 @@ namespace OnlineShopping
             this._FirstName = firstName;
             this._LastName = lastName;
             this._EmailAddress = emailAddress;
-            this._Address = address;
+            this._DeliveryAddress = address;
             this._Phone = phone;
         }
         public string getId()
@@ -70,13 +70,13 @@ namespace OnlineShopping
         {
             this._EmailAddress = emailAddress;
         }
-        public string getAddress()
+        public string getDeliveryAddress()
         {
-            return this._Address;
+            return this._DeliveryAddress;
         }
-        public void setAddress(string address)
+        public void setDeliveryAddress(string address)
         {
-            this._Address = address;
+            this._DeliveryAddress = address;
         }
 
 
