@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OnlineShopping
 {
-    public class CustomerDetails
+    public class Customer
     {
         private string _Id;
         private string _FirstName;
@@ -15,13 +15,13 @@ namespace OnlineShopping
         private string _DeliveryAddress;
         private string _Phone;
 
-        public CustomerDetails(string id, string firstName, string lastName)
+        public Customer(string id, string firstName, string lastName)
         {
             this._Id = id;
             this._FirstName = firstName;
             this._LastName = lastName;
         }
-        public CustomerDetails(string id, string firstName, string lastName, string emailAddress, string address, string phone)
+        public Customer(string id, string firstName, string lastName, string emailAddress, string address, string phone)
         {
             this._Id = id;
             this._FirstName = firstName;
