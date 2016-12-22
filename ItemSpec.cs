@@ -68,7 +68,25 @@ namespace OnlineShopping
             foreach (var property in this._Properties.ToArray())
             {
                 string propertyName = property.Key;
-                if(!this._Properties[propertyName].Equals(otherSpec.getProperty(propertyName)))
+                if (!otherSpec.containsProperty(propertyName))
+                {
+                    continue;
+                }
+                else if(!this._Properties[propertyName].Equals(otherSpec.getProperty(propertyName)))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        public bool strictlyMatches(ItemSpec otherSpec)
+        {
+            foreach (var property in this._Properties.ToArray())
+            {
+                string propertyName = property.Key;
+                if (!this._Properties[propertyName].Equals(otherSpec.getProperty(propertyName)))
                 {
                     return false;
                 }

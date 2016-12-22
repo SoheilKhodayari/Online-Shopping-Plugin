@@ -11,6 +11,8 @@ namespace OnlineShopping
         public string _Name;
         private int _Level;
 
+        public abstract List<Item> getItems();
+
         public string getName()
         {
             return _Name;
@@ -28,6 +30,31 @@ namespace OnlineShopping
             this._Level = level;
         }
 
+        public IList<Item> search(ItemSpec spec)
+        {
+            List<Item> result = new List<Item>();
+            foreach (var item in this.getItems())
+            {
+                if (spec.matches(item.getSpec()))
+                {
+                    result.Add(item);
+                }
+            }
+            return result.AsReadOnly();
+        }
+        public IList<Item> strictSearch(ItemSpec spec)
+        {
+            List<Item> result = new List<Item>();
+            foreach (var item in this.getItems())
+            {
+                if (spec.strictlyMatches(item.getSpec()))
+                {
+                    result.Add(item);
+                }
+            }
+            return result.AsReadOnly();
+        }
+
     }
     public class ItemCategory : Category
     {
@@ -39,7 +66,7 @@ namespace OnlineShopping
             this._Items = new List<Item>();
         }
 
-        public List<Item> getItems()
+        public override List<Item> getItems()
         {
             return this._Items;
         }
@@ -68,6 +95,16 @@ namespace OnlineShopping
             var nextLevel = this.getLevel()+1;
             category.setLevel(nextLevel);
             _Categories.Add(category);
+        }
+
+        public override List<Item> getItems()
+        {
+            List<Item> items = new List<Item>();
+            foreach(var cat in this._Categories)
+            {
+                items.AddRange(cat.getItems());
+            }
+            return items;
         }
     }
 
