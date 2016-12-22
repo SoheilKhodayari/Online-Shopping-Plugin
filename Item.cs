@@ -12,6 +12,7 @@ namespace OnlineShopping
         private string _Name;
         private decimal _Price;
         private string _ProducerName;
+        private Dictionary<string, Object> _Properties;
         private ItemSpec _Spec;
 
         public Item(int Id, string name, decimal price, string producerName, ItemSpec spec)
@@ -22,5 +23,7 @@ namespace OnlineShopping
             this._ProducerName = producerName;
             this._Spec = spec;
         }
+
+        public void addProperty()
     }
 }

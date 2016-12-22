@@ -13,6 +13,11 @@ namespace OnlineShopping
         {
             this._Properties = new Dictionary<string, Object>();
         }
+        public ItemSpec(Dictionary<string,Object> properties)
+        {
+            this._Properties = properties;
+        }
+
         public bool addPropertyIfNotExists(string key, Object value)
         {
             if(!this._Properties.ContainsKey(key))
@@ -39,8 +44,6 @@ namespace OnlineShopping
             }
             return null;
         }
-             
-
         
     }
 }
