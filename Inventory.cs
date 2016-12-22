@@ -8,16 +8,16 @@ namespace OnlineShopping
 {
     public class Inventory
     {
-        private const int _firstLevel = 0;
+        private const int _FirstLevel = 0;
         private string _Id;
         private string _Name;
-        private List<Category> _mainCategories;
+        private List<Category> _MainCategories;
 
         public Inventory(string id, string name)
         {
             this._Id = id;
             this._Name = name;
-            this._mainCategories = new List<Category>();
+            this._MainCategories = new List<Category>();
         }
         public Inventory(string id, string name, List<Category> categories)
         {
@@ -45,20 +45,20 @@ namespace OnlineShopping
         }
         public List<Category> getMainCategories()
         {
-            return this._mainCategories;
+            return this._MainCategories;
         }
         public void setMainCategories(List<Category> categories)
         {
             foreach(var cat in categories)
             {
-                cat.setLevel(_firstLevel);
+                cat.setLevel(_FirstLevel);
             }
-            this._mainCategories = categories;
+            this._MainCategories = categories;
         }
         public List<Item> getAllItems()
         {
             List<Item> items = new List<Item>();
-            foreach(var cat in this._mainCategories)
+            foreach(var cat in this._MainCategories)
             {
                 items.AddRange(cat.getItems());
             }
@@ -66,14 +66,14 @@ namespace OnlineShopping
         }
         public void addMainCategory(Category mainCategory)
         {
-            mainCategory.setLevel(_firstLevel);
-            this._mainCategories.Add(mainCategory);
+            mainCategory.setLevel(_FirstLevel);
+            this._MainCategories.Add(mainCategory);
         }
 
         public IList<Item> search(ItemSpec spec)
         {
             List<Item> result = new List<Item>();
-            foreach(var cat in this._mainCategories)
+            foreach(var cat in this._MainCategories)
             {
                 result.AddRange(cat.search(spec));
             }
@@ -82,7 +82,7 @@ namespace OnlineShopping
         public IList<Item> strictSearch(ItemSpec spec)
         {
             List<Item> result = new List<Item>();
-            foreach (var cat in this._mainCategories)
+            foreach (var cat in this._MainCategories)
             {
                 result.AddRange(cat.search(spec));
             }
