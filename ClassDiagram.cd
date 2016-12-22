@@ -1,21 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="OnlineShopping.Basket" Collapsed="true">
-    <Position X="5.25" Y="0.5" Width="1.5" />
+  <Class Name="OnlineShopping.Basket">
+    <Position X="11.75" Y="7.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AgAAAQAQABAAAABAADCAAAAAAAAAAAAAAEIAAAAEAAA=</HashCode>
       <FileName>Basket.cs</FileName>
     </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="_Items" />
+    </ShowAsCollectionAssociation>
   </Class>
-  <Class Name="OnlineShopping.Category" Collapsed="true">
-    <Position X="1.75" Y="0.5" Width="1.5" />
+  <Class Name="OnlineShopping.Category">
+    <Position X="7.75" Y="3" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAQAAAEAAABAAAAEAIAAAAAAAAABAACIEAAAAAAA=</HashCode>
       <FileName>Category.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="OnlineShopping.ItemCategory">
-    <Position X="0.5" Y="1.75" Width="1.5" />
+    <Position X="6.5" Y="6.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAABAAAAAAAACAAAAAAAAAAAAAAAIAAAAAAAA=</HashCode>
       <FileName>Category.cs</FileName>
@@ -24,56 +27,63 @@
       <Field Name="_Items" />
     </ShowAsCollectionAssociation>
   </Class>
-  <Class Name="OnlineShopping.NodeCategory" Collapsed="true">
-    <Position X="2.75" Y="1.75" Width="1.5" />
+  <Class Name="OnlineShopping.NodeCategory">
+    <Position X="8.75" Y="6.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAQEAAAAAAAAAAAAAAAAAEIAAAAAAAA=</HashCode>
       <FileName>Category.cs</FileName>
     </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="_Categories" />
+    </ShowAsCollectionAssociation>
   </Class>
-  <Class Name="OnlineShopping.Customer" Collapsed="true">
-    <Position X="7" Y="0.5" Width="1.5" />
+  <Class Name="OnlineShopping.Customer">
+    <Position X="13.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>CiAAAAAAIAFAAIQQCKEAAiAIAIAAAAAAAAIAQGAkAAQ=</HashCode>
       <FileName>Customer.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_CurrentBasket" />
+      <Field Name="_PurchaseHistory" />
+    </ShowAsAssociation>
   </Class>
-  <Class Name="OnlineShopping.Item" Collapsed="true">
-    <Position X="0.5" Y="4.5" Width="1.5" />
+  <Class Name="OnlineShopping.Item">
+    <Position X="3.5" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAgFAIRQAAAAAAABAEAAEAQAAAAQ=</HashCode>
       <FileName>Item.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_Spec" />
+    </ShowAsAssociation>
   </Class>
-  <Class Name="OnlineShopping.ItemSpec" Collapsed="true">
-    <Position X="5.25" Y="1.5" Width="1.5" />
+  <Class Name="OnlineShopping.ItemSpec">
+    <Position X="0.5" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAgAABAQYAgAABAAAAAAAAAAAAAAQAARIAAAAAAAAAA=</HashCode>
       <FileName>ItemSpec.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="OnlineShopping.Program" Collapsed="true">
-    <Position X="7" Y="1.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
-      <FileName>Program.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="OnlineShopping.PurchaseHistory" Collapsed="true">
-    <Position X="8.75" Y="0.5" Width="1.5" />
+  <Class Name="OnlineShopping.PurchaseHistory">
+    <Position X="14.75" Y="7.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AgAABAAAkAAAAAAAACAEAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
       <FileName>PurchaseHistory.cs</FileName>
     </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="_Records" />
+    </ShowAsCollectionAssociation>
   </Class>
   <Class Name="OnlineShopping.Shop">
-    <Position X="5.25" Y="2.5" Width="1.5" />
+    <Position X="10.75" Y="1.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AgFAAAAAAGAAAAAAACAAIAAAEAABAhBgDCAEAAAEAAA=</HashCode>
       <FileName>Shop.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
       <Field Name="_MainCategories" />
+      <Field Name="_Customers" />
     </ShowAsCollectionAssociation>
   </Class>
   <Font Name="Segoe UI" Size="9" />
