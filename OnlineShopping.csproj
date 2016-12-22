@@ -45,12 +45,12 @@
     <Compile Include="Basket.cs" />
     <Compile Include="Category.cs" />
     <Compile Include="Customer.cs" />
-    <Compile Include="Inventory.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="ItemSpec.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PurchaseHistory.cs" />
+    <Compile Include="Shop.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
