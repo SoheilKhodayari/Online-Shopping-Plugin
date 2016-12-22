@@ -9,7 +9,7 @@ namespace OnlineShopping
     public class Basket
     {
         private string _Id;
-        private DateTime _DateTime;
+        private DateTime _PurchaseTime;
         private List<Item> _Items;
 
         public Basket(string id)
@@ -31,6 +31,14 @@ namespace OnlineShopping
         {
             this._Id = id;
         }
+        public DateTime getPurchaseTime()
+        {
+            return this._PurchaseTime;
+        }
+        public void setPurchaseTime(DateTime time)
+        {
+            this._PurchaseTime = time;
+        }
         public List<Item> getItems()
         {
             return this._Items;
@@ -42,6 +50,15 @@ namespace OnlineShopping
         public void addItems(List<Item> items)
         {
             this._Items.AddRange(items);
+        }
+        public decimal getTotalPrice()
+        {
+            decimal price = 0;
+            foreach (var item in this._Items)
+            {
+                price += item.getPrice();
+            }
+            return price;
         }
     }
 }

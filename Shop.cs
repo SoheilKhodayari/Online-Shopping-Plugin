@@ -6,24 +6,26 @@ using System.Threading.Tasks;
 
 namespace OnlineShopping
 {
-    public class Inventory
+    public class Shop
     {
         private const int _FirstLevel = 0;
         private string _Id;
         private string _Name;
         private List<Category> _MainCategories;
+        private List<Customer> _Customers;
 
-        public Inventory(string id, string name)
+        public Shop(string id, string name)
         {
             this._Id = id;
             this._Name = name;
             this._MainCategories = new List<Category>();
+            this._Customers = new List<Customer>();
         }
-        public Inventory(string id, string name, List<Category> categories)
+        public Shop(string id, string name, List<Category> categories)
         {
             this._Id = id;
             this._Name = name;
-
+            this._Customers = new List<Customer>();
             setMainCategories(categories);
         }
 
@@ -42,6 +44,18 @@ namespace OnlineShopping
         public void setName(string name)
         {
             this._Name = name;
+        }
+        public List<Customer> getCustomers()
+        {
+            return this._Customers;
+        }
+        public void setCustomers(List<Customer> customers)
+        {
+            this._Customers = customers;
+        }
+        public void addCustomer(Customer customer)
+        {
+            this._Customers.Add(customer);
         }
         public List<Category> getMainCategories()
         {
@@ -69,7 +83,17 @@ namespace OnlineShopping
             mainCategory.setLevel(_FirstLevel);
             this._MainCategories.Add(mainCategory);
         }
-
+        public List<Basket> getShopPurchaseHistory()
+        {
+            List<Basket> purchaseHistory = new List<Basket>();
+            List<Basket> customerPurchased;
+            foreach (var customer in this._Customers)
+            {
+                customerPurchased = customer.getPurchaseHistory().getPurchseRecords();
+                purchaseHistory.AddRange(customerPurchased);
+            }
+            return purchaseHistory;
+        }
         public IList<Item> search(ItemSpec spec)
         {
             List<Item> result = new List<Item>();

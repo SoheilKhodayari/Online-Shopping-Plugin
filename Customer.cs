@@ -14,12 +14,16 @@ namespace OnlineShopping
         private string _EmailAddress;
         private string _DeliveryAddress;
         private string _Phone;
+        private Basket _CurrentBasket;
+        private PurchaseHistory _PurchaseHistory;
 
         public Customer(string id, string firstName, string lastName)
         {
             this._Id = id;
             this._FirstName = firstName;
             this._LastName = lastName;
+            this._CurrentBasket = new Basket(null);
+            this._PurchaseHistory = new PurchaseHistory(null);
         }
         public Customer(string id, string firstName, string lastName, string emailAddress, string address, string phone)
         {
@@ -29,6 +33,8 @@ namespace OnlineShopping
             this._EmailAddress = emailAddress;
             this._DeliveryAddress = address;
             this._Phone = phone;
+            this._CurrentBasket = new Basket(null);
+            this._PurchaseHistory = new PurchaseHistory(null);
         }
         public string getId()
         {
@@ -78,7 +84,32 @@ namespace OnlineShopping
         {
             this._DeliveryAddress = address;
         }
-
+        public Basket getCurrentBasket()
+        {
+            return this._CurrentBasket;
+        }
+        public void setCurrentBasket(Basket basket)
+        {
+            this._CurrentBasket = basket;
+        }
+        public void addItemToBasket(Item item)
+        {
+            this._CurrentBasket.addItem(item);
+        }
+        public PurchaseHistory getPurchaseHistory()
+        {
+            return this._PurchaseHistory;
+        }
+        public void setPurchaseHistory(PurchaseHistory purchaseHistory)
+        {
+            this._PurchaseHistory = purchaseHistory;
+        }
+        public void PurchaseCurrentBasket()
+        {
+            this._CurrentBasket.setPurchaseTime(DateTime.Now);
+            this._PurchaseHistory.addPurchaseRecord(this._CurrentBasket);
+            this._CurrentBasket = new Basket(null);
+        }
 
     }
 }
