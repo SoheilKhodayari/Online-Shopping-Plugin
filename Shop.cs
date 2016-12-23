@@ -13,20 +13,17 @@ namespace OnlineShopping
         private string _Name;
         private List<Category> _MainCategories;
         private List<Customer> _Customers;
+        
+        private static Shop _Shop = new Shop();
 
-        public Shop(string id, string name)
+        public static Shop getInstance()
         {
-            this._Id = id;
-            this._Name = name;
+            return _Shop;
+        }
+        private Shop()
+        {
             this._MainCategories = new List<Category>();
             this._Customers = new List<Customer>();
-        }
-        public Shop(string id, string name, List<Category> categories)
-        {
-            this._Id = id;
-            this._Name = name;
-            this._Customers = new List<Customer>();
-            setMainCategories(categories);
         }
 
         public string getId()
@@ -65,6 +62,31 @@ namespace OnlineShopping
         {
             return this._MainCategories;
         }
+        public List<Item> getAllItems()
+        {
+            List<Item> items = new List<Item>();
+            foreach (var cat in this._MainCategories)
+            {
+                items.AddRange(cat.getItems());
+            }
+            return items;
+        }
+        public bool updateExistingItemStock(Item item, uint count, bool inc=true)
+        {
+            List<Item> items = this.getAllItems();
+            Item existingItem = items.Find(i => i.getSerialNumber() == item.getSerialNumber());
+            if (existingItem.Equals(null))
+                return false;
+            if (inc)
+            {
+                existingItem.incCount(count);
+                return true;
+            }
+            else
+            {
+                return existingItem.decCount(count);
+            }
+        }
         public void setMainCategories(List<Category> categories)
         {
             foreach(var cat in categories)
@@ -72,15 +94,6 @@ namespace OnlineShopping
                 cat.setLevel(_FirstLevel);
             }
             this._MainCategories = categories;
-        }
-        public List<Item> getAllItems()
-        {
-            List<Item> items = new List<Item>();
-            foreach(var cat in this._MainCategories)
-            {
-                items.AddRange(cat.getItems());
-            }
-            return items;
         }
         public void addMainCategory(Category mainCategory)
         {

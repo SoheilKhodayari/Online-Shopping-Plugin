@@ -96,6 +96,10 @@ namespace OnlineShopping
         {
             this._CurrentBasket.addItem(item);
         }
+        public void removeItemFromBasket(Item item)
+        {
+            this._CurrentBasket.removeItem(item);
+        }
         public PurchaseHistory getPurchaseHistory()
         {
             return this._PurchaseHistory;

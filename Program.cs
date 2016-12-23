@@ -10,6 +10,7 @@ namespace OnlineShopping
     {
         static void Main(string[] args)
         {
+            /*
             ItemCategory ic = new ItemCategory("itemCategoryName");
             NodeCategory nc = new NodeCategory("nodeCategoryName");
             NodeCategory nc2 = new NodeCategory("nodeCategoryName2");
@@ -27,6 +28,30 @@ namespace OnlineShopping
             Console.WriteLine(initialList[0]);
             Console.WriteLine(initialList[1]);
             Console.WriteLine(initialList[2]);
+            */
+            
+            /*
+            Customer c = new Customer(null, "Ali", null);
+            Basket b = new Basket(null);
+            Item i = new Item(null, "name", 10, null);
+            i.setCount(10);
+            Console.WriteLine(i.getCount());
+            b.addItem(i);
+            c.addItemToBasket(i);
+            Console.WriteLine(i.getCount());
+            Console.WriteLine(b.getItems()[0].getCount());
+            */
+            Item i = new Item(null, "name", 10 ,10, null);
+            Item j = i.clone();
+            j.incCount(1);
+            Console.WriteLine(i.getCount());
+            Console.WriteLine(j.getCount());
+            i.incCount(2);
+            Console.WriteLine(i.getCount());
+            Console.WriteLine(j.getCount());
+            j.incCount(5);
+            Console.WriteLine(i.getCount());
+            Console.WriteLine(j.getCount());
 
             Console.ReadLine();
         }
