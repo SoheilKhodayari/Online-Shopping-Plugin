@@ -51,6 +51,17 @@ namespace OnlineShopping
         {
             this._Items.AddRange(items);
         }
+        public void removeItem(Item item)
+        {
+            this._Items.Remove(item);
+        }
+        public void removeItems(List<Item> items)
+        {
+            foreach (var item in items)
+            {
+                this._Items.Remove(item);   
+            }
+        }
         public decimal getTotalPrice()
         {
             decimal price = 0;

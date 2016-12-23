@@ -57,6 +57,10 @@ namespace OnlineShopping
         {
             this._Customers.Add(customer);
         }
+        public void removeCustomer(Customer customer)
+        {
+            this._Customers.Remove(customer);
+        }
         public List<Category> getMainCategories()
         {
             return this._MainCategories;
@@ -82,6 +86,10 @@ namespace OnlineShopping
         {
             mainCategory.setLevel(_FirstLevel);
             this._MainCategories.Add(mainCategory);
+        }
+        public void removeMainCategory(Category mainCategory)
+        {
+            this._MainCategories.Remove(mainCategory);
         }
         public List<Basket> getShopPurchaseHistory()
         {
