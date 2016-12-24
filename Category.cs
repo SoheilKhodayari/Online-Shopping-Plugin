@@ -74,7 +74,11 @@ namespace OnlineShopping
 
         public void addItem(Item item)
         {
-            this._Items.Add(item);
+            Item existingItem = this._Items.Find(i => i.getSerialNumber() == item.getSerialNumber());
+            if (existingItem != null)
+                existingItem.incCount(item.getCount());
+            else
+                this._Items.Add(item);
         }
         public void removeItem(Item item)
         {

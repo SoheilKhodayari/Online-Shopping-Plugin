@@ -46,7 +46,7 @@ namespace OnlineShopping
         public bool addItem(Item item, uint count=1)
         {
             Shop shop = Shop.getInstance();
-            if(shop.updateExistingItemStock(item, count , false))
+            if(shop.checkExistingItemStock(item, count , false))
             {
                 Item newItem = this._Items.Find(i => i.getSerialNumber() == item.getSerialNumber());
                 if (newItem != null)
@@ -66,7 +66,7 @@ namespace OnlineShopping
         public void removeItem(Item item)
         {
             Shop shop = Shop.getInstance();
-            if (shop.updateExistingItemStock(item, item.getCount()))
+            if (shop.checkExistingItemStock(item, item.getCount()))
             {
                 this._Items.Remove(item);
             }

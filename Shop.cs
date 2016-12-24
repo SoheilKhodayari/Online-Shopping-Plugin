@@ -71,21 +71,34 @@ namespace OnlineShopping
             }
             return items;
         }
-        public bool updateExistingItemStock(Item item, uint count, bool inc=true)
+        public bool checkExistingItemStock(Item item, uint count, bool inc=true)
         {
             List<Item> items = this.getAllItems();
             Item existingItem = items.Find(i => i.getSerialNumber() == item.getSerialNumber());
             if (existingItem.Equals(null))
-                return false;
-            if (inc)
+                return false;            
+            if (!inc)
             {
-                existingItem.incCount(count);
+                return existingItem.getCount() >= count;
+            }
+            return true;
+        }
+        public bool updateExistingItemStock(Item item, uint count, bool inc = true)
+        {
+            if(this.checkExistingItemStock(item, count, inc))
+            {
+                if (inc)
+                {
+                    item.incCount(count);
+                }
+                else
+                {
+                    item.decCount(count);
+                }
+
                 return true;
             }
-            else
-            {
-                return existingItem.decCount(count);
-            }
+            return false;
         }
         public void setMainCategories(List<Category> categories)
         {
