@@ -6,10 +6,6 @@
       <HashCode>AgAAAQAQABAAAAAEADCAAAAAAAAAAAAAAEIAAAAEAAA=</HashCode>
       <FileName>Basket.cs</FileName>
     </TypeIdentifier>
-    <ShowAsCollectionAssociation>
-      <Field Name="_Items" />
-    </ShowAsCollectionAssociation>
-    <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="OnlineShopping.ICategory">
     <Position X="6.5" Y="3.75" Width="1.5" />
@@ -41,11 +37,6 @@
       <HashCode>CiAAAAAAIAFAAIQQCKEAAiAIAKAAAAAAAAIAQGAkAAQ=</HashCode>
       <FileName>Customer.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Field Name="_PurchaseHistory" />
-      <Field Name="_CurrentBasket" />
-    </ShowAsAssociation>
-    <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="OnlineShopping.Item" BaseTypeListCollapsed="true">
     <Position X="6.25" Y="10.5" Width="1.5" />
@@ -53,10 +44,6 @@
       <HashCode>AAAAAAAAAAAAAAAAAiFAIRQAAAAAAABAEAIEUQAEAgQ=</HashCode>
       <FileName>Item.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Field Name="_Spec" />
-    </ShowAsAssociation>
-    <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="OnlineShopping.ItemSpec" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="19.75" Y="0.5" Width="1.5" />
@@ -64,7 +51,6 @@
       <HashCode>AAgAABAQYAgAABAAAAAAAAAAAAAAQAARIAAAAAAAAAA=</HashCode>
       <FileName>ItemSpec.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="OnlineShopping.Program" Collapsed="true">
     <Position X="21.5" Y="0.5" Width="1.5" />
@@ -79,10 +65,6 @@
       <HashCode>AgAABAAAkAAAAAAAACAEAAAAAAAAAAAQAAAAAAAEAAA=</HashCode>
       <FileName>PurchaseHistory.cs</FileName>
     </TypeIdentifier>
-    <ShowAsCollectionAssociation>
-      <Field Name="_Records" />
-    </ShowAsCollectionAssociation>
-    <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="OnlineShopping.Shop" BaseTypeListCollapsed="true">
     <Position X="3.5" Y="0.5" Width="1.5" />
@@ -95,51 +77,7 @@
     </ShowAsAssociation>
     <ShowAsCollectionAssociation>
       <Field Name="_MainCategories" />
-      <Field Name="_Customers" />
     </ShowAsCollectionAssociation>
-    <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Interface Name="OnlineShopping.IBasket">
-    <Position X="11.25" Y="5.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AgAAAQAQAAAAAAAEACCAAAAAAAAAAAAAAEIAAAAAAAA=</HashCode>
-      <FileName>Interfaces\IBasket.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
-  <Interface Name="OnlineShopping.ICustomer">
-    <Position X="0.5" Y="1" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>CiAAAAAAIABAAIQACKAAAgAIAKAAAAAAAAIAQEAgAAA=</HashCode>
-      <FileName>Interfaces\ICustomer.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
-  <Interface Name="OnlineShopping.IItem">
-    <Position X="10.5" Y="10.25" Width="1.75" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAACBAARQAAAAAAABAEAAEUQAEAgA=</HashCode>
-      <FileName>Interfaces\IItem.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
-  <Interface Name="OnlineShopping.IItemSpec">
-    <Position X="3.25" Y="10.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAgAABAQYAgAAAAAAAAAAAAAAAAAQAARIAAAAAAAAAA=</HashCode>
-      <FileName>Interfaces\IItemSpec.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
-  <Interface Name="OnlineShopping.IPurchaseHistory">
-    <Position X="17.25" Y="4.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AgAABAAAgAAAAAAAACAEAAAAAAAAAAAQAAAAAAAAAAA=</HashCode>
-      <FileName>Interfaces\IPurchaseHistory.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
-  <Interface Name="OnlineShopping.IShop" Collapsed="true">
-    <Position X="19.75" Y="1.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AgECAAgAAGAAAAAAACAAAAAIEAABAgBgCSAEAAAAAAA=</HashCode>
-      <FileName>Interfaces\IShop.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>
