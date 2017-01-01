@@ -71,31 +71,30 @@ namespace OnlineShopping
             }
             return items;
         }
-        public bool checkExistingItemStock(Item item, uint count, bool inc=true)
+        public bool checkExistingItemStock(Item item, uint count)
         {
             List<Item> items = this.getAllItems();
             Item existingItem = items.Find(i => i.getSerialNumber() == item.getSerialNumber());
             if (existingItem.Equals(null))
                 return false;            
-            if (!inc)
-            {
-                return existingItem.getCount() >= count;
-            }
-            return true;
+            return existingItem.getCount() >= count;
         }
         public bool updateExistingItemStock(Item item, uint count, bool inc = true)
         {
-            if(this.checkExistingItemStock(item, count, inc))
+            if (inc)
             {
-                if (inc)
+                List<Item> items = this.getAllItems();
+                Item existingItem = items.Find(i => i.getSerialNumber() == item.getSerialNumber());
+                if (!existingItem.Equals(null))
                 {
                     item.incCount(count);
+                    return true;
                 }
-                else
-                {
-                    item.decCount(count);
-                }
-
+                return false;
+            }
+            else if(this.checkExistingItemStock(item, count))
+            {
+                item.decCount(count);
                 return true;
             }
             return false;

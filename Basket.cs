@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 namespace OnlineShopping
 {
-    public class Basket : OnlineShopping.IBasket
+    public class Basket : IBasket
     {
         private string _Id;
         private DateTime _PurchaseTime;

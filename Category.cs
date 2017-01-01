@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OnlineShopping
 {
-    public abstract class Category : OnlineShopping.ICategory
+    public abstract class Category : ICategory
     {
         public string _Name;
         private int _Level;
@@ -56,7 +56,7 @@ namespace OnlineShopping
         }
 
     }
-    public class ItemCategory : Category, OnlineShopping.IItemCategory
+    public class ItemCategory : Category, IItemCategory
 
     {
         private List<Item> _Items;
