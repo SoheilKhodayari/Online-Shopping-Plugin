@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OnlineShopping
 {
-    public class Customer : OnlineShopping.ICustomer
+    public class Customer : ICustomer
     {
         private string _Id;
         private string _FirstName;
@@ -17,15 +17,6 @@ namespace OnlineShopping
         private IBasket _CurrentBasket;
         private IPurchaseHistory _PurchaseHistory;
 
-
-        /**Note
-         *  Using static lock means that if thread 1 calls instance1.DoSomething() 
-         *  and thread 2 calls instance2.DoSomething, the second call will 
-         *  block. 
-         *  We will need this scenario since both threads(customers) may request 
-         *  the exact same Item on our shop and the Item availability must be
-         *  checked.
-         */
         private static readonly object _syncLock = new object();
         public Customer(string id, string firstName, string lastName)
         {
@@ -121,12 +112,11 @@ namespace OnlineShopping
         public bool PurchaseCurrentBasket()
         {
             Shop shop = Shop.getInstance();
-            //lock here
             lock (_syncLock)
             {
                 foreach (var item in this._CurrentBasket.getItems())
                 {
-                    if (!shop.checkExistingItemStock(item, item.getCount(), false))
+                    if (!shop.checkExistingItemStock(item, item.getCount()))
                         return false;
                 }
                 foreach (var item in this._CurrentBasket.getItems())
@@ -134,7 +124,6 @@ namespace OnlineShopping
                     shop.updateExistingItemStock(item, item.getCount(), false);
                 }
             }
-            //unlock here
             this._CurrentBasket.setPurchaseTime(DateTime.Now);
             this._PurchaseHistory.addPurchaseRecord(this._CurrentBasket);
             this._CurrentBasket = new Basket(null);

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OnlineShopping
 {
-    public class Shop : OnlineShopping.IShop
+    public class Shop : IShop
     {
 
         private string _Id;
@@ -72,31 +72,29 @@ namespace OnlineShopping
             }
             return items;
         }
-        public bool checkExistingItemStock(IItem item, uint count, bool inc = true)
+        public bool checkExistingItemStock(IItem item, uint count)
         {
             List<IItem> items = this.getAllItems();
             IItem existingItem = items.Find(i => i.getSerialNumber() == item.getSerialNumber());
             if (existingItem.Equals(null))
                 return false;            
-            if (!inc)
-            {
-                return existingItem.getCount() >= count;
-            }
-            return true;
+            return existingItem.getCount() >= count;
+            
         }
         public bool updateExistingItemStock(IItem item, uint count, bool inc = true)
         {
-            if(this.checkExistingItemStock(item, count, inc))
+            if (inc)
             {
-                if (inc)
+                List<IItem> items = this.getAllItems();
+                IItem existingItem = items.Find(i => i.getSerialNumber() == item.getSerialNumber());
+                if (!existingItem.Equals(null))
                 {
                     item.incCount(count);
                 }
-                else
-                {
-                    item.decCount(count);
-                }
-
+            }
+            else if(this.checkExistingItemStock(item, count))
+            {
+                item.decCount(count);
                 return true;
             }
             return false;

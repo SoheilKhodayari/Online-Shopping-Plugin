@@ -16,7 +16,7 @@ namespace OnlineShopping
         void removeMainCategory(ICategory mainCategory);
         List<ICategory> getMainCategories();
         void setMainCategories(List<ICategory> categories);
-        bool checkExistingItemStock(IItem item, uint count, bool inc = true);
+        bool checkExistingItemStock(IItem item, uint count);
         bool updateExistingItemStock(IItem item, uint count, bool inc = true);
         List<IItem> getAllItems();
         List<IBasket> getShopPurchaseHistory();

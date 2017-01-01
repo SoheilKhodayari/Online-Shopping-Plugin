@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OnlineShopping
 {
-    public class ItemSpec : OnlineShopping.IItemSpec
+    public class ItemSpec : IItemSpec
     {
         private Dictionary<string, Object> _Properties;
         public ItemSpec()
@@ -113,7 +113,6 @@ namespace OnlineShopping
             Dictionary<string, Object> diff = new Dictionary<string, Object>();
             Dictionary<string, Object> otherDiff = new Dictionary<string, Object>();
             KeyValuePair<Dictionary<string, Object>,Dictionary<string, Object>> differences;
-
             foreach (var property in this._Properties.ToArray())
             {
                 string propertyName = property.Key;
