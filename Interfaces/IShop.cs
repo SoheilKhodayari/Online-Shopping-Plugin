@@ -5,24 +5,22 @@ namespace OnlineShopping
     interface IShop
     {
         void addCustomer(Customer customer);
-        void setCustomers(List<Customer> customers);
-        List<Customer> getCustomers();
-
         void addMainCategory(Category mainCategory);
-        List<Category> getMainCategories();
-        void setMainCategories(List<Category> categories);
-
+        bool checkExistingItemStock(Item item, uint count, bool inc = true);
         List<Item> getAllItems();
-        List<Basket> getShopPurchaseHistory();
-
-        IList<Item> search(ItemSpec spec);
-        IList<Item> strictSearch(ItemSpec spec);
-
+        List<Customer> getCustomers();
         string getId();
-        void setId(string id);
-
-        void setName(string name);
+        List<Category> getMainCategories();
         string getName();
-
+        List<Basket> getShopPurchaseHistory();
+        void removeCustomer(Customer customer);
+        void removeMainCategory(Category mainCategory);
+        System.Collections.Generic.IList<Item> search(ItemSpec spec);
+        void setCustomers(List<Customer> customers);
+        void setId(string id);
+        void setMainCategories(List<Category> categories);
+        void setName(string name);
+        IList<Item> strictSearch(ItemSpec spec);
+        bool updateExistingItemStock(Item item, uint count, bool inc = true);
     }
 }
