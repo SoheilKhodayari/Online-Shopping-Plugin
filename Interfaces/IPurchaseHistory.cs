@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 namespace OnlineShopping
 {
-    interface IPurchaseHistory
+    public interface IPurchaseHistory
     {
-        void addPurchaseRecord(Basket basket);
         string getId();
-        List<Basket> getPurchseRecords();
         void setId(string id);
-        void setPurchseRecords(List<Basket> records);
+        void addPurchaseRecord(IBasket record);
+        void removePurchaseRecord(IBasket record);
+        List<IBasket> getPurchseRecords();
+        void setPurchseRecords(List<IBasket> records);
+        void removePurchaseRecords(List<IBasket> records);
+
+
     }
 }

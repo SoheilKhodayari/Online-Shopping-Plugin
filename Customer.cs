@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OnlineShopping
 {
-    public class Customer
+    public class Customer : OnlineShopping.ICustomer
     {
         private string _Id;
         private string _FirstName;
@@ -14,9 +14,19 @@ namespace OnlineShopping
         private string _EmailAddress;
         private string _DeliveryAddress;
         private string _Phone;
-        private Basket _CurrentBasket;
-        private PurchaseHistory _PurchaseHistory;
+        private IBasket _CurrentBasket;
+        private IPurchaseHistory _PurchaseHistory;
 
+
+        /**Note
+         *  Using static lock means that if thread 1 calls instance1.DoSomething() 
+         *  and thread 2 calls instance2.DoSomething, the second call will 
+         *  block. 
+         *  We will need this scenario since both threads(customers) may request 
+         *  the exact same Item on our shop and the Item availability must be
+         *  checked.
+         */
+        private static readonly object _syncLock = new object();
         public Customer(string id, string firstName, string lastName)
         {
             this._Id = id;
@@ -84,27 +94,27 @@ namespace OnlineShopping
         {
             this._DeliveryAddress = address;
         }
-        public Basket getCurrentBasket()
+        public IBasket getCurrentBasket()
         {
             return this._CurrentBasket;
         }
-        public void setCurrentBasket(Basket basket)
+        public void setCurrentBasket(IBasket basket)
         {
             this._CurrentBasket = basket;
         }
-        public void addItemToBasket(Item item)
+        public void addItemToBasket(IItem item)
         {
             this._CurrentBasket.addItem(item);
         }
-        public void removeItemFromBasket(Item item)
+        public void removeItemFromBasket(IItem item)
         {
             this._CurrentBasket.removeItem(item);
         }
-        public PurchaseHistory getPurchaseHistory()
+        public IPurchaseHistory getPurchaseHistory()
         {
             return this._PurchaseHistory;
         }
-        public void setPurchaseHistory(PurchaseHistory purchaseHistory)
+        public void setPurchaseHistory(IPurchaseHistory purchaseHistory)
         {
             this._PurchaseHistory = purchaseHistory;
         }
@@ -112,14 +122,17 @@ namespace OnlineShopping
         {
             Shop shop = Shop.getInstance();
             //lock here
-            foreach (var item in this._CurrentBasket.getItems())
+            lock (_syncLock)
             {
-                if (!shop.checkExistingItemStock(item, item.getCount(), false))
-                    return false;
-            }
-            foreach (var item in this._CurrentBasket.getItems())
-            {
-                shop.updateExistingItemStock(item, item.getCount(), false);
+                foreach (var item in this._CurrentBasket.getItems())
+                {
+                    if (!shop.checkExistingItemStock(item, item.getCount(), false))
+                        return false;
+                }
+                foreach (var item in this._CurrentBasket.getItems())
+                {
+                    shop.updateExistingItemStock(item, item.getCount(), false);
+                }
             }
             //unlock here
             this._CurrentBasket.setPurchaseTime(DateTime.Now);

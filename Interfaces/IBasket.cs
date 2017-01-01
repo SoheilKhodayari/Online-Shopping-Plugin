@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-
 namespace OnlineShopping
 {
-    interface IBasket
+    public interface IBasket
     {
-        void addItem(Item item);
-        void addItems(List<Item> items);
-        string getId();
-        List<Item> getItems();
-        DateTime getPurchaseTime();
+        bool addItem(IItem item, uint count = 1);
+        void removeItem(IItem item);
+        List<IItem> getItems();
         decimal getTotalPrice();
+        string getId();
         void setId(string id);
         void setPurchaseTime(DateTime time);
+        DateTime getPurchaseTime();
+
     }
 }
