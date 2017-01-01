@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace OnlineShopping
 {
-    public abstract class Category : OnlineShopping.ICategory
+    public abstract class ICategory
     {
         public string _Name;
         private int _Level;
 
-        public abstract List<Item> getItems();
+        public abstract List<IItem> getItems();
 
         public string getName()
         {
@@ -30,9 +30,9 @@ namespace OnlineShopping
             this._Level = level;
         }
 
-        public IList<Item> search(ItemSpec spec)
+        public IList<IItem> search(IItemSpec spec)
         {
-            List<Item> result = new List<Item>();
+            List<IItem> result = new List<IItem>();
             foreach (var item in this.getItems())
             {
                 if (spec.matches(item.getSpec()))
@@ -42,9 +42,9 @@ namespace OnlineShopping
             }
             return result.AsReadOnly();
         }
-        public IList<Item> strictSearch(ItemSpec spec)
+        public IList<IItem> strictSearch(IItemSpec spec)
         {
-            List<Item> result = new List<Item>();
+            List<IItem> result = new List<IItem>();
             foreach (var item in this.getItems())
             {
                 if (spec.strictlyMatches(item.getSpec()))
@@ -56,65 +56,65 @@ namespace OnlineShopping
         }
 
     }
-    public class ItemCategory : Category, OnlineShopping.IItemCategory
+    public class ItemCategory : ICategory
 
     {
-        private List<Item> _Items;
+        private List<IItem> _Items;
 
         public ItemCategory(string name)
         {
             this._Name = name;
-            this._Items = new List<Item>();
+            this._Items = new List<IItem>();
         }
 
-        public override List<Item> getItems()
+        public override List<IItem> getItems()
         {
             return this._Items;
         }
 
-        public void addItem(Item item)
+        public void addItem(IItem item)
         {
-            Item existingItem = this._Items.Find(i => i.getSerialNumber() == item.getSerialNumber());
+            IItem existingItem = this._Items.Find(i => i.getSerialNumber() == item.getSerialNumber());
             if (existingItem != null)
                 existingItem.incCount(item.getCount());
             else
                 this._Items.Add(item);
         }
-        public void removeItem(Item item)
+        public void removeItem(IItem item)
         {
             this._Items.Remove(item);
         }
     }
-    public class NodeCategory : Category, OnlineShopping.INodeCategory
+    public class Category : ICategory
 
     {
-        private List<Category> _Categories;
+        private List<ICategory> _Categories;
 
-        public NodeCategory(string name)
+        public Category(string name)
         {
             this._Name = name;
-            this._Categories = new List<Category>();
+            this._Categories = new List<ICategory>();
         }
 
-        public List<Category> getChildren(){
+        public List<ICategory> getChildren(){
             return this._Categories;
         }
 
-        public void addCategory(Category category)
+        public void addCategory(ICategory category)
         {
             var nextLevel = this.getLevel()+1;
             category.setLevel(nextLevel);
             _Categories.Add(category);
         }
 
-        public void removeCategory(Category category)
+        public void removeCategory(ICategory category)
         {
             this._Categories.Remove(category);
         }
 
-        public override List<Item> getItems()
+        public override List<IItem> getItems()
         {
-            List<Item> items = new List<Item>();
+            List<IItem> items = new List<IItem>();
             foreach(var cat in this._Categories)
             {
                 items.AddRange(cat.getItems());

@@ -13,9 +13,9 @@ namespace OnlineShopping
         private string _Name;
         private decimal _Price;
         private uint _Count;
-        private ItemSpec _Spec;
+        private IItemSpec _Spec;
 
-        public Item(string serialNumber, string name, decimal price, uint count, ItemSpec spec)
+        public Item(string serialNumber, string name, decimal price, uint count, IItemSpec spec)
         {
             this._SerialNumber = serialNumber;
             this._Name = name;
@@ -23,7 +23,7 @@ namespace OnlineShopping
             this._Count = count;
             this._Spec = spec;
         }
-        public ItemSpec getSpec()
+        public IItemSpec getSpec()
         {
             return this._Spec;
         }
@@ -40,7 +40,7 @@ namespace OnlineShopping
             return this._Price;
         }
 
-        public void setSpec(ItemSpec spec)
+        public void setSpec(IItemSpec spec)
         {
             this._Spec = spec;
         }
@@ -75,9 +75,9 @@ namespace OnlineShopping
             this._Count -= count;
             return true;
         }
-        public Item clone()
+        public IItem clone()
         {
-            Item item = new Item(this._SerialNumber
+            IItem item = new Item(this._SerialNumber
                                 ,this._Name
                                 ,this._Price
                                 ,this._Count

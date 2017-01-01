@@ -9,14 +9,14 @@ namespace OnlineShopping
     {
         private string _Id;
         private DateTime _PurchaseTime;
-        private List<Item> _Items;
+        private List<IItem> _Items;
 
         public Basket(string id)
         {
             this._Id = id;
-            this._Items = new List<Item>();
+            this._Items = new List<IItem>();
         }
-        public Basket(string id, List<Item> items)
+        public Basket(string id, List<IItem> items)
         {
             this._Id = id;
             this._Items = items;
@@ -38,16 +38,16 @@ namespace OnlineShopping
         {
             this._PurchaseTime = time;
         }
-        public List<Item> getItems()
+        public List<IItem> getItems()
         {
             return this._Items;
         }
-        public bool addItem(Item item, uint count=1)
+        public bool addItem(IItem item, uint count = 1)
         {
             Shop shop = Shop.getInstance();
             if(shop.checkExistingItemStock(item, count , false))
             {
-                Item newItem = this._Items.Find(i => i.getSerialNumber() == item.getSerialNumber());
+                IItem newItem = this._Items.Find(i => i.getSerialNumber() == item.getSerialNumber());
                 if (newItem != null)
                 {
                     newItem.incCount(count);
@@ -62,7 +62,7 @@ namespace OnlineShopping
             }
             return false;
         }
-        public void removeItem(Item item)
+        public void removeItem(IItem item)
         {
             Shop shop = Shop.getInstance();
             if (shop.checkExistingItemStock(item, item.getCount()))

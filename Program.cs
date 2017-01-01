@@ -41,8 +41,8 @@ namespace OnlineShopping
             Console.WriteLine(i.getCount());
             Console.WriteLine(b.getItems()[0].getCount());
             */
-            Item i = new Item(null, "name", 10 ,10, null);
-            Item j = i.clone();
+            IItem i = new Item(null, "name", 10 ,10, null);
+            IItem j = i.clone();
             j.incCount(1);
             Console.WriteLine(i.getCount());
             Console.WriteLine(j.getCount());

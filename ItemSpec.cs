@@ -55,7 +55,7 @@ namespace OnlineShopping
             return this._Properties.ContainsKey(key);
         }
 
-        public bool hasEqualProperty(string propertyName, ItemSpec otherSpec)
+        public bool hasEqualProperty(string propertyName, IItemSpec otherSpec)
         {
             if (otherSpec.containsProperty(propertyName) 
                 && this._Properties[propertyName].Equals(otherSpec.getProperty(propertyName)))
@@ -63,7 +63,7 @@ namespace OnlineShopping
             return false;
         }
 
-        public bool matches(ItemSpec otherSpec)
+        public bool matches(IItemSpec otherSpec)
         {
             foreach (var property in this._Properties.ToArray())
             {
@@ -81,7 +81,7 @@ namespace OnlineShopping
             return true;
         }
 
-        public bool strictlyMatches(ItemSpec otherSpec)
+        public bool strictlyMatches(IItemSpec otherSpec)
         {
             foreach (var property in this._Properties.ToArray())
             {
@@ -95,7 +95,7 @@ namespace OnlineShopping
             return true;
         }
 
-        public Dictionary<string, Object> getSameProperties(ItemSpec otherSpec)
+        public Dictionary<string, Object> getSameProperties(IItemSpec otherSpec)
         {
             Dictionary<string, Object> sameProperties = new Dictionary<string, Object>();
             foreach (var property in this._Properties.ToArray())
@@ -108,7 +108,7 @@ namespace OnlineShopping
             }
             return sameProperties;
         }
-        public KeyValuePair<Dictionary<string, Object>,Dictionary<string, Object>> getDifferentProperties(ItemSpec otherSpec)
+        public KeyValuePair<Dictionary<string, Object>,Dictionary<string, Object>> getDifferentProperties(IItemSpec otherSpec)
         {
             Dictionary<string, Object> diff = new Dictionary<string, Object>();
             Dictionary<string, Object> otherDiff = new Dictionary<string, Object>();
