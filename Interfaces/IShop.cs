@@ -5,18 +5,24 @@ namespace OnlineShopping
     interface IShop
     {
         void addCustomer(Customer customer);
-        void addMainCategory(Category mainCategory);
-        List<Item> getAllItems();
-        List<Customer> getCustomers();
-        string getId();
-        List<Category> getMainCategories();
-        string getName();
-        List<Basket> getShopPurchaseHistory();
-        IList<Item> search(ItemSpec spec);
         void setCustomers(List<Customer> customers);
-        void setId(string id);
+        List<Customer> getCustomers();
+
+        void addMainCategory(Category mainCategory);
+        List<Category> getMainCategories();
         void setMainCategories(List<Category> categories);
-        void setName(string name);
+
+        List<Item> getAllItems();
+        List<Basket> getShopPurchaseHistory();
+
+        IList<Item> search(ItemSpec spec);
         IList<Item> strictSearch(ItemSpec spec);
+
+        string getId();
+        void setId(string id);
+
+        void setName(string name);
+        string getName();
+
     }
 }

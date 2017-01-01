@@ -5,8 +5,7 @@ namespace OnlineShopping
 {
     interface IBasket
     {
-        void addItem(Item item);
-        void addItems(List<Item> items);
+        bool addItem(Item item, uint count = 1);
         string getId();
         List<Item> getItems();
         DateTime getPurchaseTime();
