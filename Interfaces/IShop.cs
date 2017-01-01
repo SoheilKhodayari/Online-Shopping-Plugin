@@ -15,7 +15,7 @@ namespace OnlineShopping
         List<Basket> getShopPurchaseHistory();
         void removeCustomer(Customer customer);
         void removeMainCategory(Category mainCategory);
-        System.Collections.Generic.IList<Item> search(ItemSpec spec);
+        IList<Item> search(ItemSpec spec);
         void setCustomers(List<Customer> customers);
         void setId(string id);
         void setMainCategories(List<Category> categories);
