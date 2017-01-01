@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OnlineShopping
 {
-    public class Shop : OnlineShopping.IShop, OnlineShopping.IShop
+    public class Shop : OnlineShopping.IShop
     {
         private const int _FirstLevel = 0;
         private string _Id;
