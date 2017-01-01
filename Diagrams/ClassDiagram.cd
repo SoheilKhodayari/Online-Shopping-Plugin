@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="OnlineShopping.Basket">
+    <Position X="19" Y="13.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AgAAAQAQABAAAABAADCAAAAAAAAAAAAAAEIAAAAEAAA=</HashCode>
+      <FileName>Basket.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="_Items" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OnlineShopping.Category">
+    <Position X="10.75" Y="3" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAEAAABAAAAEAIAAAAAAAAABAACIEAAAAAAA=</HashCode>
+      <FileName>Category.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OnlineShopping.ItemCategory">
+    <Position X="7.75" Y="6.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAACAAAAAAAAAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>Category.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="_Items" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OnlineShopping.NodeCategory">
+    <Position X="13.75" Y="6.75" Width="2.75" />
+    <AssociationLine Name="_Categories" Type="OnlineShopping.Category" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="15.698" Y="6.75" />
+        <Point X="15.698" Y="4.451" />
+        <Point X="13.75" Y="4.451" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQEAAAAAAAAAAAAAAAAAEIAAAAAAAA=</HashCode>
+      <FileName>Category.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="_Categories" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OnlineShopping.Customer">
+    <Position X="24.75" Y="0.5" Width="6.75" />
+    <AssociationLine Name="_CurrentBasket" Type="OnlineShopping.Basket" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="26.844" Y="6.67" />
+        <Point X="26.844" Y="14.75" />
+        <Point X="22.25" Y="14.75" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="_PurchaseHistory" Type="OnlineShopping.PurchaseHistory" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="30.062" Y="6.67" />
+        <Point X="30.062" Y="10.335" />
+        <Point X="30.062" Y="10.335" />
+        <Point X="30.062" Y="14" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.152" Y="0.479" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>CiAAAAAAIAFAAIQQCKEAAiAIAIAAAAAAAAIAQGAkAAQ=</HashCode>
+      <FileName>Customer.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_CurrentBasket" />
+      <Field Name="_PurchaseHistory" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="OnlineShopping.Item">
+    <Position X="2" Y="8.75" Width="4.5" />
+    <AssociationLine Name="_Spec" Type="OnlineShopping.ItemSpec">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.61" Y="0.102" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgFAIRQAAAAAAABAEAAEAQAAAAQ=</HashCode>
+      <FileName>Item.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_Spec" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OnlineShopping.ItemSpec">
+    <Position X="7.25" Y="13.5" Width="7.25" />
+    <TypeIdentifier>
+      <HashCode>AAgAABAQYAgAABAAAAAAAAAAAAAAQAARIAAAAAAAAAA=</HashCode>
+      <FileName>ItemSpec.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OnlineShopping.PurchaseHistory">
+    <Position X="28.5" Y="14" Width="3.5" />
+    <AssociationLine Name="_Records" Type="OnlineShopping.Basket" FixedFromPoint="true">
+      <Path>
+        <Point X="28.5" Y="15.625" />
+        <Point X="22.25" Y="15.625" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AgAABAAAkAAAAAAAACAEAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>PurchaseHistory.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="_Records" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OnlineShopping.Shop">
+    <Position X="18.5" Y="1.25" Width="4" />
+    <TypeIdentifier>
+      <HashCode>AgFAAAAAAGAAAAAAACAAIAAAEAABAhBgDCAEAAAEAAA=</HashCode>
+      <FileName>Shop.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="_MainCategories" />
+      <Field Name="_Customers" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<useCaseDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="UMLUseCaseDiagram1">
+  <useCaseModelRootMoniker Id="bd959fb5-a465-4942-8cfa-027a3a916e59" />
+  <nestedChildShapes>
+    <actorShape Id="01b386ba-7f73-4b75-a2bc-be35353fe531" absoluteBounds="2.5, 4.5, 0.5, 0.5" isReference="false" heightOffset="0">
+      <actorMoniker Id="2a261418-21aa-4436-b84c-7e8ee5c08071" LastKnownName="Framework User  (Programmer)" />
+      <relativeChildShapes />
+    </actorShape>
+    <useCaseShape Id="d272d441-9d32-45c0-8b6d-15d4cf25e20a" absoluteBounds="4.875, 1.75, 1.25, 0.75" customColor="238, 237, 131" heightOffset="0">
+      <useCaseMoniker Id="892364c7-cd01-4694-8260-ab9989fc736d" LastKnownName="Add Category" />
+      <relativeChildShapes />
+    </useCaseShape>
+    <useCaseShape Id="5ebc9a57-2d78-4868-9a19-2058af20b266" absoluteBounds="5, 4, 1.25, 0.75" customColor="238, 237, 131" heightOffset="0">
+      <useCaseMoniker Id="f0765555-1777-42cd-a8ae-f9c24ed5476e" LastKnownName="Search Item" />
+      <relativeChildShapes />
+    </useCaseShape>
+    <useCaseShape Id="a693ea7d-3c08-46c3-b27c-6f940a539d22" absoluteBounds="4.875, 0.75, 1.25, 0.75" customColor="238, 237, 131" heightOffset="0">
+      <useCaseMoniker Id="d5d37a21-7c21-4558-a33d-ab7b3291f5a2" LastKnownName="Create Shop" />
+      <relativeChildShapes />
+    </useCaseShape>
+    <useCaseShape Id="c180e89a-c47a-4b17-8bb9-43fc40066364" absoluteBounds="4.875, 5.125, 1.25, 0.75" customColor="238, 237, 131" heightOffset="0">
+      <useCaseMoniker Id="b324ff7e-6f36-4bfe-b1ab-0db9ed03383a" LastKnownName="Compare Items" />
+      <relativeChildShapes />
+    </useCaseShape>
+    <useCaseShape Id="7b190e24-51e0-4ac0-8da2-e9034e868184" absoluteBounds="4.875, 2.875, 1.25, 0.75" customColor="238, 237, 131" heightOffset="0">
+      <useCaseMoniker Id="3fae3101-4e92-4ae2-9495-6fc1c83f67ea" LastKnownName="Create Item" />
+      <relativeChildShapes />
+    </useCaseShape>
+    <useCaseShape Id="16d25e89-d514-44b9-9bc0-df60bec5d83e" absoluteBounds="5, 6.25, 1.25, 0.75" customColor="238, 237, 131" heightOffset="0">
+      <useCaseMoniker Id="6534038d-1265-4891-bb5f-b7dbcaa9e3c2" LastKnownName="Add Item To Basket" />
+      <relativeChildShapes />
+    </useCaseShape>
+    <useCaseShape Id="71605356-4387-4406-b905-d53e5a72c2a1" absoluteBounds="5, 7.5, 1.25, 0.75" customColor="238, 237, 131" heightOffset="0">
+      <useCaseMoniker Id="0b2f6c9d-df5e-41de-a5c2-0b186a348259" LastKnownName="Purchase History" />
+      <relativeChildShapes />
+    </useCaseShape>
+  </nestedChildShapes>
+</useCaseDiagram>

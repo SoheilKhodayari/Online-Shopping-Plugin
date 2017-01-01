@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<useCaseModelRoot xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ComponentDesigner" xmlns:dm10="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="bd959fb5-a465-4942-8cfa-027a3a916e59" name="UMLUseCaseDiagram1" linkedPackageId="836b2944-0060-423c-afac-d8fc334d67c0" xmlns="http://schemas.microsoft.com/dsltools/UseCaseModel">
+  <profileInstances>
+    <packageHasProfileInstances Id="ee3a27f8-67c4-42d7-8c1f-f35cd16985cd">
+      <profileInstance Id="aa05b9e0-f3ce-459b-84a8-1e162010639a" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="e0abde41-3e42-42be-b100-8892d9bae6a9">
+      <profileInstance Id="32fa2d9a-03b1-4b9f-8607-60ef4b6aa742" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <useCaseModelRootHasTypes>
+      <actor Id="2a261418-21aa-4436-b84c-7e8ee5c08071" name="Framework User  (Programmer)" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="0cfdeb20-a07c-4613-b381-8af2a0250e24" />
+      </actor>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="892364c7-cd01-4694-8260-ab9989fc736d" name="Add Category" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="7fe1e8c5-21d4-4e2e-a03a-21e07042ac28" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="f0765555-1777-42cd-a8ae-f9c24ed5476e" name="Search Item" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="2bb85a20-310e-427f-9b4c-9eb6a136b4f6" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="d5d37a21-7c21-4558-a33d-ab7b3291f5a2" name="Create Shop" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="122cc3e8-bea7-4865-a414-ff1672746e5e" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="b324ff7e-6f36-4bfe-b1ab-0db9ed03383a" name="Compare Items" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="e16b8a3c-3d43-4a8b-b481-e38e4de492a7" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="3fae3101-4e92-4ae2-9495-6fc1c83f67ea" name="Create Item" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="4e3b9559-a9c6-4305-ac3e-6808c162a524" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="6534038d-1265-4891-bb5f-b7dbcaa9e3c2" name="Add Item To Basket" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="f60be1d0-99e7-404e-aca6-4bc6ee856964" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="0b2f6c9d-df5e-41de-a5c2-0b186a348259" name="Purchase History" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="5c5ba6aa-53c6-4592-9934-a1cd2ea7dcea" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+  </packagedElements>
+  <package Id="836b2944-0060-423c-afac-d8fc334d67c0" name="ModelingProject1">
+    <elementDefinition Id="43d0da25-03a8-4429-912c-c74e2d67c5b5" />
+  </package>
+</useCaseModelRoot>

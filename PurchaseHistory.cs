@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OnlineShopping
 {
-    public class PurchaseHistory
+    public class PurchaseHistory : OnlineShopping.IPurchaseHistory
     {
         private string _Id;
         private List<Basket> _Records;

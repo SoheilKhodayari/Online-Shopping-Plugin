@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace OnlineShopping
 {
     
-    public class Item
+    public class Item : OnlineShopping.IItem
     {
         private string _SerialNumber;
         private string _Name;

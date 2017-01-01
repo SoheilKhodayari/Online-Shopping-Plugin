@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OnlineShopping
 {
-    public class ItemSpec
+    public class ItemSpec : OnlineShopping.IItemSpec
     {
         private Dictionary<string, Object> _Properties;
         public ItemSpec()

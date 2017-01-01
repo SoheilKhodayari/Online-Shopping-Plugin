@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 namespace OnlineShopping
 {
-    public class Basket
+    public class Basket : OnlineShopping.IBasket
     {
         private string _Id;
         private DateTime _PurchaseTime;
