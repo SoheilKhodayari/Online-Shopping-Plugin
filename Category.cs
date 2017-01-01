@@ -57,6 +57,7 @@ namespace OnlineShopping
 
     }
     public class ItemCategory : Category, OnlineShopping.IItemCategory
+
     {
         private List<Item> _Items;
 
@@ -73,10 +74,19 @@ namespace OnlineShopping
 
         public void addItem(Item item)
         {
-            _Items.Add(item);
+            Item existingItem = this._Items.Find(i => i.getSerialNumber() == item.getSerialNumber());
+            if (existingItem != null)
+                existingItem.incCount(item.getCount());
+            else
+                this._Items.Add(item);
+        }
+        public void removeItem(Item item)
+        {
+            this._Items.Remove(item);
         }
     }
     public class NodeCategory : Category, OnlineShopping.INodeCategory
+
     {
         private List<Category> _Categories;
 
@@ -95,6 +105,11 @@ namespace OnlineShopping
             var nextLevel = this.getLevel()+1;
             category.setLevel(nextLevel);
             _Categories.Add(category);
+        }
+
+        public void removeCategory(Category category)
+        {
+            this._Categories.Remove(category);
         }
 
         public override List<Item> getItems()

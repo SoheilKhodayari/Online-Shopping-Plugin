@@ -38,9 +38,20 @@ namespace OnlineShopping
         {
             this._Records = records;
         }
-        public void addPurchaseRecord(Basket basket)
+        public void addPurchaseRecord(Basket record)
         {
-            this._Records.Add(basket);
+            this._Records.Add(record);
+        }
+        public void removePurchaseRecord(Basket record)
+        {
+            this._Records.Remove(record);
+        }
+        public void removePurchaseRecords(List<Basket> records)
+        {
+            foreach (var record in records)
+            {
+                this._Records.Remove(record);
+            }
         }
     }
 }

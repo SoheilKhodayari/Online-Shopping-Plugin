@@ -96,6 +96,10 @@ namespace OnlineShopping
         {
             this._CurrentBasket.addItem(item);
         }
+        public void removeItemFromBasket(Item item)
+        {
+            this._CurrentBasket.removeItem(item);
+        }
         public PurchaseHistory getPurchaseHistory()
         {
             return this._PurchaseHistory;
@@ -104,11 +108,25 @@ namespace OnlineShopping
         {
             this._PurchaseHistory = purchaseHistory;
         }
-        public void PurchaseCurrentBasket()
+        public bool PurchaseCurrentBasket()
         {
+            Shop shop = Shop.getInstance();
+            //lock here
+            foreach (var item in this._CurrentBasket.getItems())
+            {
+                if (!shop.checkExistingItemStock(item, item.getCount(), false))
+                    return false;
+            }
+            foreach (var item in this._CurrentBasket.getItems())
+            {
+                shop.updateExistingItemStock(item, item.getCount(), false);
+            }
+            //unlock here
             this._CurrentBasket.setPurchaseTime(DateTime.Now);
             this._PurchaseHistory.addPurchaseRecord(this._CurrentBasket);
             this._CurrentBasket = new Basket(null);
+            
+            return true;
         }
 
     }

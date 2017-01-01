@@ -12,13 +12,15 @@ namespace OnlineShopping
         private string _SerialNumber;
         private string _Name;
         private decimal _Price;
+        private uint _Count;
         private ItemSpec _Spec;
 
-        public Item(string serialNumber, string name, decimal price, ItemSpec spec)
+        public Item(string serialNumber, string name, decimal price, uint count, ItemSpec spec)
         {
             this._SerialNumber = serialNumber;
             this._Name = name;
             this._Price = price;
+            this._Count = count;
             this._Spec = spec;
         }
         public ItemSpec getSpec()
@@ -54,6 +56,33 @@ namespace OnlineShopping
         {
             this._SerialNumber = serialNumber;
         }
-
+        public void setCount(uint count)
+        {
+            this._Count = count;
+        }
+        public uint getCount()
+        {
+            return this._Count;
+        }
+        public void incCount(uint count)
+        {
+            this._Count += count;
+        }
+        public bool decCount(uint count)
+        {
+            if (this._Count < count)
+                return false;
+            this._Count -= count;
+            return true;
+        }
+        public Item clone()
+        {
+            Item item = new Item(this._SerialNumber
+                                ,this._Name
+                                ,this._Price
+                                ,this._Count
+                                ,this._Spec);
+            return item;
+        }
     }
 }

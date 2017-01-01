@@ -42,20 +42,40 @@ namespace OnlineShopping
         {
             return this._Items;
         }
-        public void addItem(Item item)
+        public bool addItem(Item item, uint count=1)
         {
-            this._Items.Add(item);
+            Shop shop = Shop.getInstance();
+            if(shop.checkExistingItemStock(item, count , false))
+            {
+                Item newItem = this._Items.Find(i => i.getSerialNumber() == item.getSerialNumber());
+                if (newItem != null)
+                {
+                    newItem.incCount(count);
+                }
+                else
+                {
+                    newItem = item.clone();
+                    newItem.setCount(count);
+                }
+                this._Items.Add(newItem);
+                return true;
+            }
+            return false;
         }
-        public void addItems(List<Item> items)
+        public void removeItem(Item item)
         {
-            this._Items.AddRange(items);
+            Shop shop = Shop.getInstance();
+            if (shop.checkExistingItemStock(item, item.getCount()))
+            {
+                this._Items.Remove(item);
+            }
         }
         public decimal getTotalPrice()
         {
             decimal price = 0;
             foreach (var item in this._Items)
             {
-                price += item.getPrice();
+                price += item.getPrice() * item.getCount();
             }
             return price;
         }
