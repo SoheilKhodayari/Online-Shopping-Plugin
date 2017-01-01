@@ -17,6 +17,16 @@ namespace OnlineShopping
         private Basket _CurrentBasket;
         private PurchaseHistory _PurchaseHistory;
 
+
+        /**Note
+         *  Using static lock means that if thread 1 calls instance1.DoSomething() 
+         *  and thread 2 calls instance2.DoSomething, the second call will 
+         *  block. 
+         *  We will need this scenario since both threads(customers) may request 
+         *  the exact same Item on our shop and the Item availability must be
+         *  checked.
+         */
+        private static readonly object _syncLock = new object();
         public Customer(string id, string firstName, string lastName)
         {
             this._Id = id;
@@ -112,14 +122,17 @@ namespace OnlineShopping
         {
             Shop shop = Shop.getInstance();
             //lock here
-            foreach (var item in this._CurrentBasket.getItems())
+            lock (_syncLock)
             {
-                if (!shop.checkExistingItemStock(item, item.getCount(), false))
-                    return false;
-            }
-            foreach (var item in this._CurrentBasket.getItems())
-            {
-                shop.updateExistingItemStock(item, item.getCount(), false);
+                foreach (var item in this._CurrentBasket.getItems())
+                {
+                    if (!shop.checkExistingItemStock(item, item.getCount(), false))
+                        return false;
+                }
+                foreach (var item in this._CurrentBasket.getItems())
+                {
+                    shop.updateExistingItemStock(item, item.getCount(), false);
+                }
             }
             //unlock here
             this._CurrentBasket.setPurchaseTime(DateTime.Now);
