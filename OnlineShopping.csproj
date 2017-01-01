@@ -45,7 +45,6 @@
     <Compile Include="Basket.cs" />
     <Compile Include="Category.cs" />
     <Compile Include="Customer.cs" />
-<<<<<<< HEAD
     <Compile Include="Interfaces\IItemSpec.cs" />
     <Compile Include="Interfaces\IItem.cs" />
     <Compile Include="Interfaces\ICategory.cs" />
@@ -54,9 +53,7 @@
     <Compile Include="Interfaces\IBasket.cs" />
     <Compile Include="Interfaces\IPurchaseHistory.cs" />
     <Compile Include="Interfaces\IShop.cs" />
-=======
     <Compile Include="Shop.cs" />
->>>>>>> f7f671555d8df26c2752aacd46d21b8b51e9f48d
     <Compile Include="Item.cs" />
     <Compile Include="ItemSpec.cs" />
     <Compile Include="Program.cs" />
@@ -65,11 +62,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-<<<<<<< HEAD
     <None Include="Diagrams\ClassDiagram.cd" />
-=======
-    <None Include="ClassDiagram.cd" />
->>>>>>> f7f671555d8df26c2752aacd46d21b8b51e9f48d
+
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
