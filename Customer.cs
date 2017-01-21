@@ -4,18 +4,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 namespace OnlineShopping
 {
     public class Customer : ICustomer
     {
-        private string _Id;
-        private string _FirstName;
-        private string _LastName;
-        private string _EmailAddress;
-        private string _DeliveryAddress;
-        private string _Phone;
-        private IBasket _CurrentBasket;
-        private IPurchaseHistory _PurchaseHistory;
+        [Key]
+        public string _Id { get; set; }
+        public string _FirstName { get; set; }
+        public string _LastName { get; set; }
+        public string _EmailAddress { get; set; }
+        public string _DeliveryAddress { get; set; }
+        public string _Phone { get; set; }
+        public virtual Basket _CurrentBasket { get; set; }
+        public virtual PurchaseHistory _PurchaseHistory { get; set; }
 
         private static readonly object _syncLock = new object();
         public Customer(string id, string firstName, string lastName)
@@ -85,27 +90,27 @@ namespace OnlineShopping
         {
             this._DeliveryAddress = address;
         }
-        public IBasket getCurrentBasket()
+        public Basket getCurrentBasket()
         {
             return this._CurrentBasket;
         }
-        public void setCurrentBasket(IBasket basket)
+        public void setCurrentBasket(Basket basket)
         {
             this._CurrentBasket = basket;
         }
-        public void addItemToBasket(IItem item)
+        public void addItemToBasket(Item item)
         {
             this._CurrentBasket.addItem(item);
         }
-        public void removeItemFromBasket(IItem item)
+        public void removeItemFromBasket(Item item)
         {
             this._CurrentBasket.removeItem(item);
         }
-        public IPurchaseHistory getPurchaseHistory()
+        public PurchaseHistory getPurchaseHistory()
         {
             return this._PurchaseHistory;
         }
-        public void setPurchaseHistory(IPurchaseHistory purchaseHistory)
+        public void setPurchaseHistory(PurchaseHistory purchaseHistory)
         {
             this._PurchaseHistory = purchaseHistory;
         }

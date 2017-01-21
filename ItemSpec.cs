@@ -3,12 +3,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
 
 namespace OnlineShopping
 {
     public class ItemSpec : IItemSpec
     {
-        private Dictionary<string, Object> _Properties;
+        [Key]
+        public int _Id {get; set;}
+
+        [NotMapped]
+        public Dictionary<string, Object> _Properties;
+
+        public string _PropertiesDB { get; set; }
+
+
+        public void SyncPropertiesFromSerializations()
+        {
+            this._PropertiesDB = JsonConvert.SerializeObject(this._Properties);
+        }
+        public void SyncPropertiesToSerializations()
+        {
+            this._Properties = JsonConvert.DeserializeObject<Dictionary<string, Object>>(_PropertiesDB);
+        }
         public ItemSpec()
         {
             this._Properties = new Dictionary<string, Object>();
@@ -55,7 +76,7 @@ namespace OnlineShopping
             return this._Properties.ContainsKey(key);
         }
 
-        public bool hasEqualProperty(string propertyName, IItemSpec otherSpec)
+        public bool hasEqualProperty(string propertyName, ItemSpec otherSpec)
         {
             if (otherSpec.containsProperty(propertyName) 
                 && this._Properties[propertyName].Equals(otherSpec.getProperty(propertyName)))
@@ -63,7 +84,7 @@ namespace OnlineShopping
             return false;
         }
 
-        public bool matches(IItemSpec otherSpec)
+        public bool matches(ItemSpec otherSpec)
         {
             foreach (var property in this._Properties.ToArray())
             {
@@ -81,7 +102,7 @@ namespace OnlineShopping
             return true;
         }
 
-        public bool strictlyMatches(IItemSpec otherSpec)
+        public bool strictlyMatches(ItemSpec otherSpec)
         {
             foreach (var property in this._Properties.ToArray())
             {
@@ -95,7 +116,7 @@ namespace OnlineShopping
             return true;
         }
 
-        public Dictionary<string, Object> getSameProperties(IItemSpec otherSpec)
+        public Dictionary<string, Object> getSameProperties(ItemSpec otherSpec)
         {
             Dictionary<string, Object> sameProperties = new Dictionary<string, Object>();
             foreach (var property in this._Properties.ToArray())
@@ -108,7 +129,7 @@ namespace OnlineShopping
             }
             return sameProperties;
         }
-        public Tuple<Dictionary<string, Object>, Dictionary<string, Object>> getDifferentProperties(IItemSpec otherSpec)
+        public Tuple<Dictionary<string, Object>, Dictionary<string, Object>> getDifferentProperties(ItemSpec otherSpec)
         {
             Dictionary<string, Object> diff = new Dictionary<string, Object>();
             Dictionary<string, Object> otherDiff = new Dictionary<string, Object>();

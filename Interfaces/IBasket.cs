@@ -4,9 +4,9 @@ namespace OnlineShopping
 {
     public interface IBasket
     {
-        bool addItem(IItem item, uint count = 1);
-        void removeItem(IItem item);
-        List<IItem> getItems();
+        bool addItem(Item item, uint count = 1);
+        void removeItem(Item item);
+        List<Item> getItems();
         decimal getTotalPrice();
         string getId();
         void setId(string id);

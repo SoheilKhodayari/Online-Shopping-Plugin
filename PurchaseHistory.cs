@@ -3,20 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShopping
 {
     public class PurchaseHistory : IPurchaseHistory
     {
-        private string _Id;
-        private List<IBasket> _Records;
+        [Key]
+        public string _Id {get; set;}
+        public virtual List<Basket> _Records { get; set; }
 
         public PurchaseHistory(string id)
         {
             this._Id = id;
-            this._Records = new List<IBasket>();
+            this._Records = new List<Basket>();
         }
-        public PurchaseHistory(string id, List<IBasket> records)
+        public PurchaseHistory(string id, List<Basket> records)
         {
             this._Id = id;
             this._Records = records;
@@ -30,23 +34,23 @@ namespace OnlineShopping
         {
             this._Id = id;
         }
-        public List<IBasket> getPurchseRecords()
+        public List<Basket> getPurchseRecords()
         {
             return this._Records;
         }
-        public void setPurchseRecords(List<IBasket> records)
+        public void setPurchseRecords(List<Basket> records)
         {
             this._Records = records;
         }
-        public void addPurchaseRecord(IBasket record)
+        public void addPurchaseRecord(Basket record)
         {
             this._Records.Add(record);
         }
-        public void removePurchaseRecord(IBasket record)
+        public void removePurchaseRecord(Basket record)
         {
             this._Records.Remove(record);
         }
-        public void removePurchaseRecords(List<IBasket> records)
+        public void removePurchaseRecords(List<Basket> records)
         {
             foreach (var record in records)
             {

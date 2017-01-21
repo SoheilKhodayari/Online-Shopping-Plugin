@@ -9,11 +9,11 @@ namespace OnlineShopping
         Dictionary<string, object> getProperties();
         object getProperty(string key);
         bool setProperty(string key, object value);
-        bool hasEqualProperty(string propertyName, IItemSpec otherSpec);
-        bool matches(IItemSpec otherSpec);
-        bool strictlyMatches(IItemSpec otherSpec);
-        KeyValuePair<Dictionary<string, object>, Dictionary<string, object>> getDifferentProperties(IItemSpec otherSpec);
-        Dictionary<string, object> getSameProperties(IItemSpec otherSpec);
+        bool hasEqualProperty(string propertyName, ItemSpec otherSpec);
+        bool matches(ItemSpec otherSpec);
+        bool strictlyMatches(ItemSpec otherSpec);
+        Tuple<Dictionary<string, object>, Dictionary<string, object>> getDifferentProperties(ItemSpec otherSpec);
+        Dictionary<string, object> getSameProperties(ItemSpec otherSpec);
 
 
     }

@@ -3,20 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.ComponentModel.DataAnnotations;
+
 namespace OnlineShopping
 {
     public class Basket : IBasket
     {
-        private string _Id;
-        private DateTime _PurchaseTime;
-        private List<IItem> _Items;
+        [Key]
+        public string _Id { get; set; }
+        public DateTime _PurchaseTime { get; set; }
+        public virtual List<Item> _Items { get; set; }
 
         public Basket(string id)
         {
             this._Id = id;
-            this._Items = new List<IItem>();
+            this._Items = new List<Item>();
         }
-        public Basket(string id, List<IItem> items)
+        public Basket(string id, List<Item> items)
         {
             this._Id = id;
             this._Items = items;
@@ -38,16 +43,16 @@ namespace OnlineShopping
         {
             this._PurchaseTime = time;
         }
-        public List<IItem> getItems()
+        public List<Item> getItems()
         {
             return this._Items;
         }
-        public bool addItem(IItem item, uint count = 1)
+        public bool addItem(Item item, uint count = 1)
         {
             Shop shop = Shop.getInstance();
             if(shop.checkExistingItemStock(item, count))
             {
-                IItem newItem = this._Items.Find(i => i.getSerialNumber() == item.getSerialNumber());
+                Item newItem = this._Items.Find(i => i.getSerialNumber() == item.getSerialNumber());
                 if (newItem != null)
                 {
                     newItem.incCount(count);
@@ -62,7 +67,7 @@ namespace OnlineShopping
             }
             return false;
         }
-        public void removeItem(IItem item)
+        public void removeItem(Item item)
         {
             Shop shop = Shop.getInstance();
             if (shop.checkExistingItemStock(item, item.getCount()))

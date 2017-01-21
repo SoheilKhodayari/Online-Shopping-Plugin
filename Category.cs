@@ -3,15 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShopping
 {
     public abstract class ICategory
     {
-        public string _Name;
-        private int _Level;
+        [Key]
+        public int _Id {get; set;}
+        public int _Level { get; set; }
+        public string _Name { get; set; }
 
-        public abstract List<IItem> getItems();
+        public abstract List<Item> getItems();
 
         public string getName()
         {
@@ -30,9 +35,9 @@ namespace OnlineShopping
             this._Level = level;
         }
 
-        public IList<IItem> search(IItemSpec spec)
+        public IList<Item> search(ItemSpec spec)
         {
-            List<IItem> result = new List<IItem>();
+            List<Item> result = new List<Item>();
             foreach (var item in this.getItems())
             {
                 if (spec.matches(item.getSpec()))
@@ -42,9 +47,9 @@ namespace OnlineShopping
             }
             return result.AsReadOnly();
         }
-        public IList<IItem> strictSearch(IItemSpec spec)
+        public IList<Item> strictSearch(ItemSpec spec)
         {
-            List<IItem> result = new List<IItem>();
+            List<Item> result = new List<Item>();
             foreach (var item in this.getItems())
             {
                 if (spec.strictlyMatches(item.getSpec()))
@@ -59,28 +64,28 @@ namespace OnlineShopping
     public class ItemCategory : ICategory
 
     {
-        private List<IItem> _Items;
+        private List<Item> _Items;
 
         public ItemCategory(string name)
         {
             this._Name = name;
-            this._Items = new List<IItem>();
+            this._Items = new List<Item>();
         }
 
-        public override List<IItem> getItems()
+        public override List<Item> getItems()
         {
             return this._Items;
         }
 
-        public void addItem(IItem item)
+        public void addItem(Item item)
         {
-            IItem existingItem = this._Items.Find(i => i.getSerialNumber() == item.getSerialNumber());
+            Item existingItem = this._Items.Find(i => i.getSerialNumber() == item.getSerialNumber());
             if (existingItem != null)
                 existingItem.incCount(item.getCount());
             else
                 this._Items.Add(item);
         }
-        public void removeItem(IItem item)
+        public void removeItem(Item item)
         {
             this._Items.Remove(item);
         }
@@ -112,9 +117,9 @@ namespace OnlineShopping
             this._Categories.Remove(category);
         }
 
-        public override List<IItem> getItems()
+        public override List<Item> getItems()
         {
-            List<IItem> items = new List<IItem>();
+            List<Item> items = new List<Item>();
             foreach(var cat in this._Categories)
             {
                 items.AddRange(cat.getItems());

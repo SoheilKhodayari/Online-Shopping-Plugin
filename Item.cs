@@ -4,18 +4,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.ComponentModel.DataAnnotations;
+
 namespace OnlineShopping
 {
     
     public class Item : IItem
     {
-        private string _SerialNumber;
-        private string _Name;
-        private decimal _Price;
-        private uint _Count;
-        private IItemSpec _Spec;
+        [Key]
+        public string _SerialNumber {get; set;}
+        public string _Name { get; set; }
+        public decimal _Price { get; set; }
+        public uint _Count { get; set; }
+        public virtual ItemSpec _Spec { get; set; }
 
-        public Item(string serialNumber, string name, decimal price, uint count, IItemSpec spec)
+        public Item(string serialNumber, string name, decimal price, uint count, ItemSpec spec)
         {
             this._SerialNumber = serialNumber;
             this._Name = name;
@@ -23,7 +28,7 @@ namespace OnlineShopping
             this._Count = count;
             this._Spec = spec;
         }
-        public IItemSpec getSpec()
+        public ItemSpec getSpec()
         {
             return this._Spec;
         }
@@ -40,7 +45,7 @@ namespace OnlineShopping
             return this._Price;
         }
 
-        public void setSpec(IItemSpec spec)
+        public void setSpec(ItemSpec spec)
         {
             this._Spec = spec;
         }
@@ -75,9 +80,9 @@ namespace OnlineShopping
             this._Count -= count;
             return true;
         }
-        public IItem clone()
+        public Item clone()
         {
-            IItem item = new Item(this._SerialNumber
+            Item item = new Item(this._SerialNumber
                                 ,this._Name
                                 ,this._Price
                                 ,this._Count

@@ -8,19 +8,19 @@ namespace OnlineShopping
         void setId(string id);
         string getName();
         void setName(string name);
-        void addCustomer(ICustomer customer);
-        void removeCustomer(ICustomer customer);
-        List<ICustomer> getCustomers();
-        void setCustomers(List<ICustomer> customers);
+        void addCustomer(Customer customer);
+        void removeCustomer(Customer customer);
+        List<Customer> getCustomers();
+        void setCustomers(List<Customer> customers);
         void addMainCategory(ICategory mainCategory);
         void removeMainCategory(ICategory mainCategory);
         List<ICategory> getMainCategories();
         void setMainCategories(List<ICategory> categories);
-        bool checkExistingItemStock(IItem item, uint count, bool inc = true);
-        bool updateExistingItemStock(IItem item, uint count, bool inc = true);
-        List<IItem> getAllItems();
-        List<IBasket> getShopPurchaseHistory();
-        IList<IItem> search(IItemSpec spec);
-        IList<IItem> strictSearch(IItemSpec spec);
+        bool checkExistingItemStock(Item item, uint count);
+        bool updateExistingItemStock(Item item, uint count, bool inc = true);
+        List<Item> getAllItems();
+        List<Basket> getShopPurchaseHistory();
+        IList<Item> search(ItemSpec spec);
+        IList<Item> strictSearch(ItemSpec spec);
     }
 }

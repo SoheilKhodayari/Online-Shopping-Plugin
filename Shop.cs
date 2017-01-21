@@ -4,15 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.ComponentModel.DataAnnotations;
+
 namespace OnlineShopping
 {
     public class Shop : IShop
     {
 
-        private string _Id;
-        private string _Name;
-        private List<ICategory> _MainCategories;
-        private List<ICustomer> _Customers;
+        [Key]
+        public string _Id {get; set;}
+        public string _Name { get; set; }
+        public virtual List<ICategory> _MainCategories { get; set; }
+        public virtual List<Customer> _Customers { get; set; }
+
         private const int _FirstLevel = 0;
 
         private static Shop _Shop = new Shop();
@@ -24,7 +30,7 @@ namespace OnlineShopping
         private Shop()
         {
             this._MainCategories = new List<ICategory>();
-            this._Customers = new List<ICustomer>();
+            this._Customers = new List<Customer>();
         }
 
         public string getId()
@@ -43,19 +49,19 @@ namespace OnlineShopping
         {
             this._Name = name;
         }
-        public List<ICustomer> getCustomers()
+        public List<Customer> getCustomers()
         {
             return this._Customers;
         }
-        public void setCustomers(List<ICustomer> customers)
+        public void setCustomers(List<Customer> customers)
         {
             this._Customers = customers;
         }
-        public void addCustomer(ICustomer customer)
+        public void addCustomer(Customer customer)
         {
             this._Customers.Add(customer);
         }
-        public void removeCustomer(ICustomer customer)
+        public void removeCustomer(Customer customer)
         {
             this._Customers.Remove(customer);
         }
@@ -63,30 +69,30 @@ namespace OnlineShopping
         {
             return this._MainCategories;
         }
-        public List<IItem> getAllItems()
+        public List<Item> getAllItems()
         {
-            List<IItem> items = new List<IItem>();
+            List<Item> items = new List<Item>();
             foreach (var cat in this._MainCategories)
             {
                 items.AddRange(cat.getItems());
             }
             return items;
         }
-        public bool checkExistingItemStock(IItem item, uint count)
+        public bool checkExistingItemStock(Item item, uint count)
         {
-            List<IItem> items = this.getAllItems();
-            IItem existingItem = items.Find(i => i.getSerialNumber() == item.getSerialNumber());
+            List<Item> items = this.getAllItems();
+            Item existingItem = items.Find(i => i.getSerialNumber() == item.getSerialNumber());
             if (existingItem.Equals(null))
                 return false;            
             return existingItem.getCount() >= count;
             
         }
-        public bool updateExistingItemStock(IItem item, uint count, bool inc = true)
+        public bool updateExistingItemStock(Item item, uint count, bool inc = true)
         {
             if (inc)
             {
-                List<IItem> items = this.getAllItems();
-                IItem existingItem = items.Find(i => i.getSerialNumber() == item.getSerialNumber());
+                List<Item> items = this.getAllItems();
+                Item existingItem = items.Find(i => i.getSerialNumber() == item.getSerialNumber());
                 if (!existingItem.Equals(null))
                 {
                     item.incCount(count);
@@ -116,10 +122,10 @@ namespace OnlineShopping
         {
             this._MainCategories.Remove(mainCategory);
         }
-        public List<IBasket> getShopPurchaseHistory()
+        public List<Basket> getShopPurchaseHistory()
         {
-            List<IBasket> purchaseHistory = new List<IBasket>();
-            List<IBasket> customerPurchased;
+            List<Basket> purchaseHistory = new List<Basket>();
+            List<Basket> customerPurchased;
             foreach (var customer in this._Customers)
             {
                 customerPurchased = customer.getPurchaseHistory().getPurchseRecords();
@@ -127,18 +133,18 @@ namespace OnlineShopping
             }
             return purchaseHistory;
         }
-        public IList<IItem> search(IItemSpec spec)
+        public IList<Item> search(ItemSpec spec)
         {
-            List<IItem> result = new List<IItem>();
+            List<Item> result = new List<Item>();
             foreach(var cat in this._MainCategories)
             {
                 result.AddRange(cat.search(spec));
             }
             return result.AsReadOnly();
         }
-        public IList<IItem> strictSearch(IItemSpec spec)
+        public IList<Item> strictSearch(ItemSpec spec)
         {
-            List<IItem> result = new List<IItem>();
+            List<Item> result = new List<Item>();
             foreach (var cat in this._MainCategories)
             {
                 result.AddRange(cat.search(spec));
