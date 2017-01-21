@@ -108,11 +108,11 @@ namespace OnlineShopping
             }
             return sameProperties;
         }
-        public KeyValuePair<Dictionary<string, Object>,Dictionary<string, Object>> getDifferentProperties(IItemSpec otherSpec)
+        public Tuple<Dictionary<string, Object>, Dictionary<string, Object>> getDifferentProperties(IItemSpec otherSpec)
         {
             Dictionary<string, Object> diff = new Dictionary<string, Object>();
             Dictionary<string, Object> otherDiff = new Dictionary<string, Object>();
-            KeyValuePair<Dictionary<string, Object>,Dictionary<string, Object>> differences;
+            Tuple<Dictionary<string, Object>,Dictionary<string, Object>> differences;
             foreach (var property in this._Properties.ToArray())
             {
                 string propertyName = property.Key;
@@ -130,10 +130,8 @@ namespace OnlineShopping
                 }
             }
 
-            differences = new KeyValuePair<Dictionary<string, Object>,Dictionary<string, Object>>(diff, otherDiff);
+            differences = new Tuple<Dictionary<string, Object>,Dictionary<string, Object>>(diff, otherDiff);
             return differences;
         }
-
-        
     }
 }
