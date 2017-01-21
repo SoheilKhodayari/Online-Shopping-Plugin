@@ -24,11 +24,11 @@ namespace OnlineShopping
 
         public void SyncPropertiesFromSerializations()
         {
-            this._PropertiesDB = JsonConvert.SerializeObject(this._Properties);
+            this._Properties = JsonConvert.DeserializeObject<Dictionary<string, Object>>(_PropertiesDB);
         }
         public void SyncPropertiesToSerializations()
         {
-            this._Properties = JsonConvert.DeserializeObject<Dictionary<string, Object>>(_PropertiesDB);
+            this._PropertiesDB = JsonConvert.SerializeObject(this._Properties);
         }
         public ItemSpec()
         {

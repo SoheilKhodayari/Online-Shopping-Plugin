@@ -64,7 +64,7 @@ namespace OnlineShopping
     public class ItemCategory : ICategory
 
     {
-        private List<Item> _Items;
+        public List<Item> _Items {get; set;}
 
         public ItemCategory(string name)
         {

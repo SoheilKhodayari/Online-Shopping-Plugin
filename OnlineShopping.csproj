@@ -69,6 +69,10 @@
     <Compile Include="Migrations\201701211639329_db_creation.Designer.cs">
       <DependentUpon>201701211639329_db_creation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201701211706320_cateogryItemList.cs" />
+    <Compile Include="Migrations\201701211706320_cateogryItemList.Designer.cs">
+      <DependentUpon>201701211706320_cateogryItemList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Shop.cs" />
     <Compile Include="Item.cs" />
@@ -86,6 +90,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201701211639329_db_creation.resx">
       <DependentUpon>201701211639329_db_creation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701211706320_cateogryItemList.resx">
+      <DependentUpon>201701211706320_cateogryItemList.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

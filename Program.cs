@@ -75,6 +75,28 @@ namespace OnlineShopping
             //test t2 = obj.ToObject<test>();
            // Console.WriteLine(t2.name);
 
+            using(var db = new AppContext())
+            {
+                Shop shop = Shop.getInstance();
+                shop.setName("test-store");
+                shop.setId("test-store-id");
+                ItemCategory computerCategory = new ItemCategory("Computer");
+                ItemSpec spec = new ItemSpec();
+                spec.addPropertyIfNotExists("color", "black");
+                spec.addPropertyIfNotExists("weight", "2.7kg");
+                spec.SyncPropertiesToSerializations();
+                db.ItemSpecs.Add(spec);
+                Item item = new Item("sf2123122","E571G-Acer-Aspire",500,5,spec);
+                db.Items.Add(item);
+
+                computerCategory._Items.Add(item);
+                db.Categories.Add(computerCategory);
+
+                shop._MainCategories.Add(computerCategory);
+                db.Shops.Add(shop);
+
+                db.SaveChanges();
+            }
             
 
             
