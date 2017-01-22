@@ -3,7 +3,7 @@ namespace OnlineShopping.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class fix_cateogory_list : DbMigration
+    public partial class db_creation_new_fix_bugs : DbMigration
     {
         public override void Up()
         {
@@ -23,14 +23,16 @@ namespace OnlineShopping.Migrations
                 "dbo.Items",
                 c => new
                     {
-                        _SerialNumber = c.String(nullable: false, maxLength: 128),
+                        Id = c.Guid(nullable: false, identity: true),
+                        _SerialNumber = c.String(),
                         _Name = c.String(),
                         _Price = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        _Count = c.Int(nullable: false),
                         _Spec__Id = c.Int(),
                         Basket__Id = c.String(maxLength: 128),
                         ItemCategory__Id = c.Int(),
                     })
-                .PrimaryKey(t => t._SerialNumber)
+                .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.ItemSpecs", t => t._Spec__Id)
                 .ForeignKey("dbo.Baskets", t => t.Basket__Id)
                 .ForeignKey("dbo.ICategories", t => t.ItemCategory__Id)

@@ -87,24 +87,46 @@ namespace OnlineShopping
             return existingItem.getCount() >= count;
             
         }
+        //public bool updateExistingItemStock(Item item, uint count, bool inc = true)
+        //{
+        //    if (inc)
+        //    {
+        //        List<Item> items = this.getAllItems();
+        //        Item existingItem = items.Find(i => i.getSerialNumber() == item.getSerialNumber());
+        //        if (!existingItem.Equals(null))
+        //        {
+        //            item.incCount(count);
+        //        }
+        //    }
+        //    else if(this.checkExistingItemStock(item, count))
+        //    {
+        //        item.decCount(count);
+        //        return true;
+        //    }
+        //    return false;
+        //}
+
         public bool updateExistingItemStock(Item item, uint count, bool inc = true)
         {
-            var db = AppContext.getInstance();
             if (inc)
             {
                 List<Item> items = this.getAllItems();
                 Item existingItem = items.Find(i => i.getSerialNumber() == item.getSerialNumber());
                 if (!existingItem.Equals(null))
                 {
-                    item.incCount(count);
-                    db.SaveChanges();
+                    existingItem.incCount(count); // Bug Fixed: changed from item to existingItem
+                    return true;
                 }
             }
-            else if(this.checkExistingItemStock(item, count))
+            else if (this.checkExistingItemStock(item, count))
             {
-                item.decCount(count);
-                db.SaveChanges();
-                return true;
+                List<Item> items = this.getAllItems();
+                Item existingItem = items.Find(i => i.getSerialNumber() == item.getSerialNumber());
+                if (!existingItem.Equals(null))
+                {
+                    existingItem.decCount(count);  // IMPORTANT: decrement the actual item count, not the cloned one!
+                    return true;
+                }
             }
             return false;
         }

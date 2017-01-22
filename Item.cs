@@ -7,13 +7,21 @@ using System.Threading.Tasks;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OnlineShopping
 {
     
     public class Item : IItem
     {
+
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
+        public Guid Id { get; set; }
+
+        //[Column(TypeName = "VARCHAR")]
+        //[StringLength(450)]
+        //[Index("Unique_SerialNumber_Constraint",IsUnique = true)]
         public string _SerialNumber {get; set;}
         public string _Name { get; set; }
         public decimal _Price { get; set; }
@@ -90,4 +98,14 @@ namespace OnlineShopping
             return item;
         }
     }
+
+    //public class CloneItem : Item
+    //{
+    //    public CloneItem(string serialNumber, string name, decimal price, uint count, ItemSpec spec):
+    //        base(serialNumber, name, price, count, spec)
+    //    {
+
+    //    }
+    //    // Nothing Here, Only a Workaround over EF problem of multiple bbject sets per type
+    //}
 }

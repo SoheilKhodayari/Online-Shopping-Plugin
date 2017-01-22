@@ -20,11 +20,19 @@ namespace OnlineShopping
         {
             this._Id = id;
             this._Items = new List<Item>();
+            this._PurchaseTime = DateTime.Today.AddYears(-200); 
+
+            /* Warning: null DateTime would throw weird Exceptions in EF!
+             * More on here:
+             * http://stackoverflow.com/questions/7938384/an-error-occurred-while-saving-entities-that-do-not-expose-foreign-key-propertie
+             * 
+             */
         }
         public Basket(string id, List<Item> items)
         {
             this._Id = id;
             this._Items = items;
+            this._PurchaseTime = DateTime.Today.AddYears(-200); 
         }
 
         public string getId()
@@ -61,18 +69,39 @@ namespace OnlineShopping
                 {
                     newItem = item.clone();
                     newItem.setCount(count);
+                    var db = AppContext.getInstance();
+                    db.Items.Add(newItem);
+                    db.SaveChanges();
                 }
                 this._Items.Add(newItem);
                 return true;
             }
             return false;
         }
-        public void removeItem(Item item)
+        public void removeItem(Item item, uint count = 1)
         {
             Shop shop = Shop.getInstance();
-            if (shop.checkExistingItemStock(item, item.getCount()))
+            if (shop.checkExistingItemStock(item, 0)) 
             {
-                this._Items.Remove(item);
+                /* if the item merely exists on shop, whether have enough count or not */
+
+                if(this._Items.Any(i=> i.getSerialNumber().Equals(item.getSerialNumber())))
+                {
+                    /* if the basket contains the cloned item */
+                    if(item.getCount()>count)
+                    {
+                        /* if the basket contains more number of items than needs to be deleted */
+                        item.decCount(count);
+                    }
+                    else
+                    {
+                        this._Items.Remove(item);
+                        var db = AppContext.getInstance();
+                        db.Items.Remove(item);
+                        db.SaveChanges();
+
+                    }
+                }
             }
         }
         public decimal getTotalPrice()

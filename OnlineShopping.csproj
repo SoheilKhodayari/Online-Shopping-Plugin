@@ -65,13 +65,9 @@
     <Compile Include="Interfaces\IItemSpec.cs" />
     <Compile Include="Interfaces\IPurchaseHistory.cs" />
     <Compile Include="Interfaces\IShop.cs" />
-    <Compile Include="Migrations\201701220428182_fix_cateogory_list.cs" />
-    <Compile Include="Migrations\201701220428182_fix_cateogory_list.Designer.cs">
-      <DependentUpon>201701220428182_fix_cateogory_list.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201701221642467_fix.cs" />
-    <Compile Include="Migrations\201701221642467_fix.Designer.cs">
-      <DependentUpon>201701221642467_fix.cs</DependentUpon>
+    <Compile Include="Migrations\201701222033289_db_creation_new_fix_bugs.cs" />
+    <Compile Include="Migrations\201701222033289_db_creation_new_fix_bugs.Designer.cs">
+      <DependentUpon>201701222033289_db_creation_new_fix_bugs.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Shop.cs" />
@@ -88,11 +84,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201701220428182_fix_cateogory_list.resx">
-      <DependentUpon>201701220428182_fix_cateogory_list.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201701221642467_fix.resx">
-      <DependentUpon>201701221642467_fix.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201701222033289_db_creation_new_fix_bugs.resx">
+      <DependentUpon>201701222033289_db_creation_new_fix_bugs.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

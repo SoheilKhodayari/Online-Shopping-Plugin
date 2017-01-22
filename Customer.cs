@@ -28,8 +28,11 @@ namespace OnlineShopping
             this._Id = id;
             this._FirstName = firstName;
             this._LastName = lastName;
-            this._CurrentBasket = new Basket(null);
-            this._PurchaseHistory = new PurchaseHistory(null);
+            //this._CurrentBasket = new Basket(null);
+            this._CurrentBasket = null;
+            this._PurchaseHistory = null;
+
+            
         }
         public Customer(string id, string firstName, string lastName, string emailAddress, string address, string phone)
         {
@@ -39,8 +42,11 @@ namespace OnlineShopping
             this._EmailAddress = emailAddress;
             this._DeliveryAddress = address;
             this._Phone = phone;
-            this._CurrentBasket = new Basket(null);
-            this._PurchaseHistory = new PurchaseHistory(null);
+            //this._CurrentBasket = new Basket(null);
+            //this._PurchaseHistory = new PurchaseHistory(null);
+
+            this._CurrentBasket = null;
+            this._PurchaseHistory = null;
         }
         public string getId()
         {
@@ -130,8 +136,21 @@ namespace OnlineShopping
                 }
             }
             this._CurrentBasket.setPurchaseTime(DateTime.Now);
-            this._PurchaseHistory.addPurchaseRecord(this._CurrentBasket);
-            this._CurrentBasket = new Basket(null);
+            
+            if(this._PurchaseHistory == null)
+            {
+                this._PurchaseHistory = new PurchaseHistory(Guid.NewGuid().ToString());
+                this._PurchaseHistory.addPurchaseRecord(this._CurrentBasket);
+                var db = AppContext.getInstance();
+                db.PurchaseHistories.Add(this._PurchaseHistory);
+                db.SaveChanges();
+            }
+            else
+            {
+                this._PurchaseHistory.addPurchaseRecord(this._CurrentBasket);
+            }
+            //this._CurrentBasket = new Basket(null);
+            this._CurrentBasket = null;
             
             return true;
         }

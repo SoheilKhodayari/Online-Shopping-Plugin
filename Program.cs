@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -98,44 +99,83 @@ namespace OnlineShopping
 
             //    db.SaveChanges();
             //}
+
+            //catch (DbEntityValidationException e)
+            //{
+            //    foreach (var eve in e.EntityValidationErrors)
+            //    {
+            //        Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+            //            eve.Entry.Entity.GetType().Name, eve.Entry.State);
+            //        foreach (var ve in eve.ValidationErrors)
+            //        {
+            //            Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+            //                ve.PropertyName, ve.ErrorMessage);
+            //        }
+            //    }
+            //   // throw;
+            //}
             var db = AppContext.getInstance();
 
             Shop shop = Shop.getInstance();
             shop.setName("MyStore");
-            shop.setId("MyStoreId");
+            shop.setId(Guid.NewGuid().ToString());
 
             Category digitalProductsCategory = new Category("DigitalProducts");
             ItemCategory laptopCategory = new ItemCategory("Laptop");
             ItemCategory mobileCategory = new ItemCategory("Mobile");
 
 
-            ItemSpec laptopItemSpec = new ItemSpec();
-            laptopItemSpec.addPropertyIfNotExists("color", "black");
-            laptopItemSpec.addPropertyIfNotExists("weight", "2.7kg");
+            ItemSpec laptopItemSpec1 = new ItemSpec();
+            laptopItemSpec1.addPropertyIfNotExists("color", "black");
+            laptopItemSpec1.addPropertyIfNotExists("weight", "2.7 Kg");
+            laptopItemSpec1.addPropertyIfNotExists("hdd", "256G SSD");
+            laptopItemSpec1.addPropertyIfNotExists("cpu", "Core i7");
+            laptopItemSpec1.addPropertyIfNotExists("ram", "DDR3 8M");
+            laptopItemSpec1.addPropertyIfNotExists("processor-freq", "2.5GHz up to 3.1 GHz");
 
-            db.ItemSpecs.Add(laptopItemSpec);
+            ItemSpec laptopItemSpec2 = new ItemSpec();
+            laptopItemSpec2.addPropertyIfNotExists("color", "white");
+            laptopItemSpec2.addPropertyIfNotExists("weight", "2.9 Kg");
+            laptopItemSpec2.addPropertyIfNotExists("hdd", "1TB 5400 RPM");
+            laptopItemSpec2.addPropertyIfNotExists("cpu", "Core i5");
+            laptopItemSpec2.addPropertyIfNotExists("ram", "DDR4 8M");
+            laptopItemSpec2.addPropertyIfNotExists("processor-freq", "2.4GHz up to 3.2 GHz");
+            laptopItemSpec2.addPropertyIfNotExists("usb 3", "2 ports");
+
+            db.ItemSpecs.Add(laptopItemSpec1);
+            db.ItemSpecs.Add(laptopItemSpec2);
             db.SaveChanges();
 
-            ItemSpec mobileItemSpec = new ItemSpec();
-            mobileItemSpec.addPropertyIfNotExists("color", "black");
-            mobileItemSpec.addPropertyIfNotExists("weight", "0.4kg");
-            mobileItemSpec.addPropertyIfNotExists("camera", "12M");
+            ItemSpec mobileItemSpec1 = new ItemSpec();
+            mobileItemSpec1.addPropertyIfNotExists("color", "black");
+            mobileItemSpec1.addPropertyIfNotExists("weight", "0.4kg");
+            mobileItemSpec1.addPropertyIfNotExists("camera", "12M");
+            mobileItemSpec1.addPropertyIfNotExists("cpu", "arm-cortex-v7");
 
-            db.ItemSpecs.Add(mobileItemSpec);
+            ItemSpec mobileItemSpec2 = new ItemSpec();
+            mobileItemSpec2.addPropertyIfNotExists("color", "black");
+            mobileItemSpec2.addPropertyIfNotExists("weight", "0.4kg");
+            mobileItemSpec2.addPropertyIfNotExists("camera", "12M");
+
+            db.ItemSpecs.Add(mobileItemSpec1);
+            db.ItemSpecs.Add(mobileItemSpec2);
             db.SaveChanges();
 
-            Item laptopItem = new Item(Guid.NewGuid().ToString(), "ACER-ASPIRE-E51G", 500, 10, laptopItemSpec);
+            Item laptopItem1 = new Item(Guid.NewGuid().ToString(), "Acer-Aspire-V571-G", 2500050, 10, laptopItemSpec1);
+            Item laptopItem2 = new Item(Guid.NewGuid().ToString(), "Lenovo-Ideapad-310-K", 3100000, 4, laptopItemSpec1);
+            Item mobileItem1 = new Item(Guid.NewGuid().ToString(), "Samsung-Galaxy-Note-7", 2400000, 5, mobileItemSpec1);
+            Item mobileItem2 = new Item(Guid.NewGuid().ToString(), "Huawei-P8-DualSim", 980000, 5, mobileItemSpec1);
 
-            db.Items.Add(laptopItem);
+            db.Items.Add(laptopItem1);
+            db.Items.Add(laptopItem2);
+            db.Items.Add(mobileItem1);
+            db.Items.Add(mobileItem2);
             db.SaveChanges();
 
-            Item mobileItem = new Item(Guid.NewGuid().ToString(), "SAMSUNG-GALAXY-NOTE7", 400, 5, mobileItemSpec);
-
-            db.Items.Add(mobileItem);
-            db.SaveChanges();
-
-            laptopCategory.addItem(laptopItem);
-            mobileCategory.addItem(mobileItem);
+            laptopCategory.addItem(laptopItem1);
+            laptopCategory.addItem(laptopItem2);
+            mobileCategory.addItem(mobileItem1);
+            mobileCategory.addItem(mobileItem2);
             digitalProductsCategory.addCategory(laptopCategory);
             digitalProductsCategory.addCategory(mobileCategory);
             shop.addMainCategory(digitalProductsCategory);
@@ -146,10 +186,61 @@ namespace OnlineShopping
             db.Shops.Add(shop);
             db.SaveChanges();
 
-            Console.WriteLine("Finished!");
 
-            
-            
+
+
+            Basket basket1 = new Basket(Guid.NewGuid().ToString());
+            Basket basket2 = new Basket(Guid.NewGuid().ToString());
+            db.Baskets.Add(basket1);
+            db.Baskets.Add(basket2);
+            db.SaveChanges();
+
+            basket1.addItem(laptopItem1);
+            basket1.addItem(mobileItem1);
+            basket2.addItem(laptopItem2);
+            db.SaveChanges();
+
+
+            var price_basket1 = basket1.getTotalPrice();
+            var price_basket2 = basket2.getTotalPrice();
+            Console.WriteLine("basket1-price:{0}", price_basket1);
+            Console.WriteLine("basket2-price:{0}", price_basket2);
+
+
+            Customer customer1 = new Customer(Guid.NewGuid().ToString(), "Soheil", "Khodayari", "shl_khodayari@yahoo.com", "Tehran-Narmak-FarjamSt", "09125626987");
+            Customer customer2 = new Customer(Guid.NewGuid().ToString(), "Ali", "Vishkaie", "avishkaie@gmail.com", "Tehran-Narmak", "09126547832");
+
+            db.Customers.Add(customer1);
+            db.Customers.Add(customer2);
+            db.SaveChanges();
+
+
+            customer1.setCurrentBasket(basket1);
+            db.SaveChanges();
+
+            bool result = customer1.PurchaseCurrentBasket();
+            db.SaveChanges();
+
+            if (result)
+            {
+                PurchaseHistory purchaseHistoryCustomer1 = customer1.getPurchaseHistory();
+                foreach (var basket in purchaseHistoryCustomer1.getPurchseRecords())
+                {
+                    Console.WriteLine("-Purchased On: {0}\n", basket.getPurchaseTime());
+                    foreach (var item in basket.getItems())
+                    {
+                        Console.WriteLine(string.Format(" Item Name: {0}, Price: {1}, Count: {2}\n", item.getName(), item.getPrice(), item.getCount()));
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("Message: Could not buy Item!");
+            }
+
+
+
+            Console.WriteLine("Finished!");
             Console.ReadLine();
         }
     }
