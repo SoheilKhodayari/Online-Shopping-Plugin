@@ -19,11 +19,17 @@ namespace OnlineShopping
         {
             this._Id = id;
             this._Records = new List<Basket>();
+            //var db = AppContext.getInstance();
+            //db.PurchaseHistories.Add(this);
+            //db.SaveChanges();
         }
         public PurchaseHistory(string id, List<Basket> records)
         {
             this._Id = id;
             this._Records = records;
+            //var db = AppContext.getInstance();
+            //db.PurchaseHistories.Add(this);
+            //db.SaveChanges();
         }
 
         public string getId()

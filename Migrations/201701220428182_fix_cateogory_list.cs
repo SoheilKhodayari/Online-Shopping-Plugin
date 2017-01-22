@@ -3,7 +3,7 @@ namespace OnlineShopping.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class db_creation : DbMigration
+    public partial class fix_cateogory_list : DbMigration
     {
         public override void Up()
         {
@@ -28,12 +28,15 @@ namespace OnlineShopping.Migrations
                         _Price = c.Decimal(nullable: false, precision: 18, scale: 2),
                         _Spec__Id = c.Int(),
                         Basket__Id = c.String(maxLength: 128),
+                        ItemCategory__Id = c.Int(),
                     })
                 .PrimaryKey(t => t._SerialNumber)
                 .ForeignKey("dbo.ItemSpecs", t => t._Spec__Id)
                 .ForeignKey("dbo.Baskets", t => t.Basket__Id)
+                .ForeignKey("dbo.ICategories", t => t.ItemCategory__Id)
                 .Index(t => t._Spec__Id)
-                .Index(t => t.Basket__Id);
+                .Index(t => t.Basket__Id)
+                .Index(t => t.ItemCategory__Id);
             
             CreateTable(
                 "dbo.ItemSpecs",
@@ -52,10 +55,13 @@ namespace OnlineShopping.Migrations
                         _Level = c.Int(nullable: false),
                         _Name = c.String(),
                         Discriminator = c.String(nullable: false, maxLength: 128),
+                        Category__Id = c.Int(),
                         Shop__Id = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t._Id)
+                .ForeignKey("dbo.ICategories", t => t.Category__Id)
                 .ForeignKey("dbo.Shops", t => t.Shop__Id)
+                .Index(t => t.Category__Id)
                 .Index(t => t.Shop__Id);
             
             CreateTable(
@@ -106,12 +112,16 @@ namespace OnlineShopping.Migrations
             DropForeignKey("dbo.Customers", "_PurchaseHistory__Id", "dbo.PurchaseHistories");
             DropForeignKey("dbo.Baskets", "PurchaseHistory__Id", "dbo.PurchaseHistories");
             DropForeignKey("dbo.Customers", "_CurrentBasket__Id", "dbo.Baskets");
+            DropForeignKey("dbo.Items", "ItemCategory__Id", "dbo.ICategories");
+            DropForeignKey("dbo.ICategories", "Category__Id", "dbo.ICategories");
             DropForeignKey("dbo.Items", "Basket__Id", "dbo.Baskets");
             DropForeignKey("dbo.Items", "_Spec__Id", "dbo.ItemSpecs");
             DropIndex("dbo.Customers", new[] { "Shop__Id" });
             DropIndex("dbo.Customers", new[] { "_PurchaseHistory__Id" });
             DropIndex("dbo.Customers", new[] { "_CurrentBasket__Id" });
             DropIndex("dbo.ICategories", new[] { "Shop__Id" });
+            DropIndex("dbo.ICategories", new[] { "Category__Id" });
+            DropIndex("dbo.Items", new[] { "ItemCategory__Id" });
             DropIndex("dbo.Items", new[] { "Basket__Id" });
             DropIndex("dbo.Items", new[] { "_Spec__Id" });
             DropIndex("dbo.Baskets", new[] { "PurchaseHistory__Id" });

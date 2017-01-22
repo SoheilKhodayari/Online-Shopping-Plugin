@@ -89,6 +89,7 @@ namespace OnlineShopping
         }
         public bool updateExistingItemStock(Item item, uint count, bool inc = true)
         {
+            var db = AppContext.getInstance();
             if (inc)
             {
                 List<Item> items = this.getAllItems();
@@ -96,11 +97,13 @@ namespace OnlineShopping
                 if (!existingItem.Equals(null))
                 {
                     item.incCount(count);
+                    db.SaveChanges();
                 }
             }
             else if(this.checkExistingItemStock(item, count))
             {
                 item.decCount(count);
+                db.SaveChanges();
                 return true;
             }
             return false;

@@ -84,6 +84,7 @@ namespace OnlineShopping
                 existingItem.incCount(item.getCount());
             else
                 this._Items.Add(item);
+
         }
         public void removeItem(Item item)
         {
@@ -93,7 +94,7 @@ namespace OnlineShopping
     public class Category : ICategory
 
     {
-        private List<ICategory> _Categories;
+        public List<ICategory> _Categories { get; set; }
 
         public Category(string name)
         {
@@ -110,6 +111,7 @@ namespace OnlineShopping
             var nextLevel = this.getLevel()+1;
             category.setLevel(nextLevel);
             _Categories.Add(category);
+ 
         }
 
         public void removeCategory(ICategory category)

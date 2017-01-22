@@ -75,30 +75,80 @@ namespace OnlineShopping
             //test t2 = obj.ToObject<test>();
            // Console.WriteLine(t2.name);
 
-            using(var db = new AppContext())
-            {
-                Shop shop = Shop.getInstance();
-                shop.setName("test-store");
-                shop.setId("test-store-id");
-                ItemCategory computerCategory = new ItemCategory("Computer");
-                ItemSpec spec = new ItemSpec();
-                spec.addPropertyIfNotExists("color", "black");
-                spec.addPropertyIfNotExists("weight", "2.7kg");
-                spec.SyncPropertiesToSerializations();
-                db.ItemSpecs.Add(spec);
-                Item item = new Item("sf2123122","E571G-Acer-Aspire",500,5,spec);
-                db.Items.Add(item);
+            //using(var db = new AppContext())
+            //{
+            //    Shop shop = Shop.getInstance();
+            //    shop.setName("test-store");
+            //    shop.setId("test-store-id");
+            //    ItemCategory computerCategory = new ItemCategory("Computer");
+            //    ItemSpec spec = new ItemSpec();
+            //    spec.addPropertyIfNotExists("color", "black");
+            //    spec.addPropertyIfNotExists("weight", "2.7kg");
+            //    spec.SyncPropertiesToSerializations();
+            //    db.ItemSpecs.Add(spec);
+            //    Item item = new Item("sf2123122","E571G-Acer-Aspire",500,5,spec);
+            //    //db.Items.Add(item);
 
-                computerCategory._Items.Add(item);
-                db.Categories.Add(computerCategory);
+            //    //computerCategory._Items.Add(item);
+            //    computerCategory.addItem(item);
+            //    db.Categories.Add(computerCategory);
 
-                shop._MainCategories.Add(computerCategory);
-                db.Shops.Add(shop);
+            //    shop._MainCategories.Add(computerCategory);
+            //    db.Shops.Add(shop);
 
-                db.SaveChanges();
-            }
+            //    db.SaveChanges();
+            //}
+            var db = AppContext.getInstance();
+
+            Shop shop = Shop.getInstance();
+            shop.setName("MyStore");
+            shop.setId("MyStoreId");
+
+            Category digitalProductsCategory = new Category("DigitalProducts");
+            ItemCategory laptopCategory = new ItemCategory("Laptop");
+            ItemCategory mobileCategory = new ItemCategory("Mobile");
+
+
+            ItemSpec laptopItemSpec = new ItemSpec();
+            laptopItemSpec.addPropertyIfNotExists("color", "black");
+            laptopItemSpec.addPropertyIfNotExists("weight", "2.7kg");
+
+            db.ItemSpecs.Add(laptopItemSpec);
+            db.SaveChanges();
+
+            ItemSpec mobileItemSpec = new ItemSpec();
+            mobileItemSpec.addPropertyIfNotExists("color", "black");
+            mobileItemSpec.addPropertyIfNotExists("weight", "0.4kg");
+            mobileItemSpec.addPropertyIfNotExists("camera", "12M");
+
+            db.ItemSpecs.Add(mobileItemSpec);
+            db.SaveChanges();
+
+            Item laptopItem = new Item(Guid.NewGuid().ToString(), "ACER-ASPIRE-E51G", 500, 10, laptopItemSpec);
+
+            db.Items.Add(laptopItem);
+            db.SaveChanges();
+
+            Item mobileItem = new Item(Guid.NewGuid().ToString(), "SAMSUNG-GALAXY-NOTE7", 400, 5, mobileItemSpec);
+
+            db.Items.Add(mobileItem);
+            db.SaveChanges();
+
+            laptopCategory.addItem(laptopItem);
+            mobileCategory.addItem(mobileItem);
+            digitalProductsCategory.addCategory(laptopCategory);
+            digitalProductsCategory.addCategory(mobileCategory);
+            shop.addMainCategory(digitalProductsCategory);
+
+            db.Categories.Add(mobileCategory);
+            db.Categories.Add(laptopCategory);
+            db.Categories.Add(digitalProductsCategory);
+            db.Shops.Add(shop);
+            db.SaveChanges();
+
+            Console.WriteLine("Finished!");
+
             
-
             
             Console.ReadLine();
         }

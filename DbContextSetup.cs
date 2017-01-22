@@ -20,7 +20,12 @@ namespace OnlineShopping
 
     public class AppContext : DbContext
     {
-
+        private static AppContext _db = new AppContext();
+ 
+        public static AppContext getInstance()
+        {
+            return _db;
+        }
         public AppContext(Boolean DropInitializeDB = false, string ConnectionStringName = "OnlineShoppingFrameworkContext")
             : base(ConnectionStringName)
         {

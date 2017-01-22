@@ -21,29 +21,35 @@ namespace OnlineShopping
 
         public string _PropertiesDB { get; set; }
 
-
-        public void SyncPropertiesFromSerializations()
-        {
-            this._Properties = JsonConvert.DeserializeObject<Dictionary<string, Object>>(_PropertiesDB);
-        }
-        public void SyncPropertiesToSerializations()
-        {
-            this._PropertiesDB = JsonConvert.SerializeObject(this._Properties);
-        }
         public ItemSpec()
         {
             this._Properties = new Dictionary<string, Object>();
+            this.syncPropertiesToSerializations();
+
         }
         public ItemSpec(Dictionary<string,Object> properties)
         {
             this._Properties = properties;
+            this.syncPropertiesToSerializations();
+        }
+
+        // consider changing these two to private or not.
+        public void syncPropertiesFromSerializations()
+        {
+            this._Properties = JsonConvert.DeserializeObject<Dictionary<string, Object>>(_PropertiesDB);
+        }
+        public void syncPropertiesToSerializations()
+        {
+            this._PropertiesDB = JsonConvert.SerializeObject(this._Properties);
         }
 
         public bool addPropertyIfNotExists(string key, Object value)
         {
+            this.syncPropertiesFromSerializations();
             if(!this._Properties.ContainsKey(key))
             {
                 this._Properties.Add(key, value);
+                this.syncPropertiesToSerializations();
                 return true;
             }
             return false;
@@ -53,12 +59,14 @@ namespace OnlineShopping
             if (this._Properties.ContainsKey(key))
             {
                 this._Properties[key] = value;
+                this.syncPropertiesToSerializations();
                 return true;
             }
             return false;
         }
         public Object getProperty(string key)
         {
+            this.syncPropertiesFromSerializations();
             if (this._Properties.ContainsKey(key))
             {
                 return this._Properties[key];
@@ -68,16 +76,21 @@ namespace OnlineShopping
 
         public Dictionary<string, Object> getProperties()
         {
+            this.syncPropertiesFromSerializations();
             return this._Properties;
         }
 
         public bool containsProperty(string key)
         {
+            this.syncPropertiesFromSerializations();
             return this._Properties.ContainsKey(key);
         }
 
         public bool hasEqualProperty(string propertyName, ItemSpec otherSpec)
         {
+            this.syncPropertiesFromSerializations();
+            otherSpec.syncPropertiesFromSerializations();
+
             if (otherSpec.containsProperty(propertyName) 
                 && this._Properties[propertyName].Equals(otherSpec.getProperty(propertyName)))
                 return true;
@@ -86,6 +99,9 @@ namespace OnlineShopping
 
         public bool matches(ItemSpec otherSpec)
         {
+            this.syncPropertiesFromSerializations();
+            otherSpec.syncPropertiesFromSerializations();
+
             foreach (var property in this._Properties.ToArray())
             {
                 string propertyName = property.Key;
@@ -104,6 +120,9 @@ namespace OnlineShopping
 
         public bool strictlyMatches(ItemSpec otherSpec)
         {
+            this.syncPropertiesFromSerializations();
+            otherSpec.syncPropertiesFromSerializations();
+
             foreach (var property in this._Properties.ToArray())
             {
                 string propertyName = property.Key;
@@ -118,6 +137,9 @@ namespace OnlineShopping
 
         public Dictionary<string, Object> getSameProperties(ItemSpec otherSpec)
         {
+            this.syncPropertiesFromSerializations();
+            otherSpec.syncPropertiesFromSerializations();
+
             Dictionary<string, Object> sameProperties = new Dictionary<string, Object>();
             foreach (var property in this._Properties.ToArray())
             {
@@ -131,6 +153,9 @@ namespace OnlineShopping
         }
         public Tuple<Dictionary<string, Object>, Dictionary<string, Object>> getDifferentProperties(ItemSpec otherSpec)
         {
+            this.syncPropertiesFromSerializations();
+            otherSpec.syncPropertiesFromSerializations();
+
             Dictionary<string, Object> diff = new Dictionary<string, Object>();
             Dictionary<string, Object> otherDiff = new Dictionary<string, Object>();
             Tuple<Dictionary<string, Object>,Dictionary<string, Object>> differences;

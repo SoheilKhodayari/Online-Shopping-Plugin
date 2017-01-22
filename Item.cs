@@ -17,7 +17,7 @@ namespace OnlineShopping
         public string _SerialNumber {get; set;}
         public string _Name { get; set; }
         public decimal _Price { get; set; }
-        public uint _Count { get; set; }
+        public int _Count { get; set; }
         public virtual ItemSpec _Spec { get; set; }
 
         public Item(string serialNumber, string name, decimal price, uint count, ItemSpec spec)
@@ -25,7 +25,7 @@ namespace OnlineShopping
             this._SerialNumber = serialNumber;
             this._Name = name;
             this._Price = price;
-            this._Count = count;
+            this._Count = (int)count;
             this._Spec = spec;
         }
         public ItemSpec getSpec()
@@ -63,21 +63,21 @@ namespace OnlineShopping
         }
         public void setCount(uint count)
         {
-            this._Count = count;
+            this._Count = (int)count;
         }
         public uint getCount()
         {
-            return this._Count;
+            return (uint)this._Count;
         }
         public void incCount(uint count)
         {
-            this._Count += count;
+            this._Count += (int)count;
         }
         public bool decCount(uint count)
         {
-            if (this._Count < count)
+            if (this._Count < (int)count)
                 return false;
-            this._Count -= count;
+            this._Count -= (int)count;
             return true;
         }
         public Item clone()
@@ -85,7 +85,7 @@ namespace OnlineShopping
             Item item = new Item(this._SerialNumber
                                 ,this._Name
                                 ,this._Price
-                                ,this._Count
+                                ,(uint)this._Count
                                 ,this._Spec);
             return item;
         }

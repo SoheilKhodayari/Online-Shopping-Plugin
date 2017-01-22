@@ -7,13 +7,13 @@ namespace OnlineShopping.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class db_creation : IMigrationMetadata
+    public sealed partial class fix_cateogory_list : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(db_creation));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(fix_cateogory_list));
         
         string IMigrationMetadata.Id
         {
-            get { return "201701211639329_db_creation"; }
+            get { return "201701220428182_fix_cateogory_list"; }
         }
         
         string IMigrationMetadata.Source
