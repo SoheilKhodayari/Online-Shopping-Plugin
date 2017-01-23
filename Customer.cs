@@ -28,7 +28,6 @@ namespace OnlineShopping
             this._Id = id;
             this._FirstName = firstName;
             this._LastName = lastName;
-            //this._CurrentBasket = new Basket(null);
             this._CurrentBasket = null;
             this._PurchaseHistory = null;
 
@@ -42,9 +41,6 @@ namespace OnlineShopping
             this._EmailAddress = emailAddress;
             this._DeliveryAddress = address;
             this._Phone = phone;
-            //this._CurrentBasket = new Basket(null);
-            //this._PurchaseHistory = new PurchaseHistory(null);
-
             this._CurrentBasket = null;
             this._PurchaseHistory = null;
         }
@@ -112,13 +108,13 @@ namespace OnlineShopping
             }
             this._CurrentBasket.addItem(item, count);
         }
-        public void removeItemFromBasket(Item item)
+        public void removeItemFromBasket(Item item, uint count=1)
         {
             if(this._CurrentBasket == null)
             {
                 return;
             }
-            this._CurrentBasket.removeItem(item);
+            this._CurrentBasket.removeItem(item, count);
         }
         public PurchaseHistory getPurchaseHistory()
         {
