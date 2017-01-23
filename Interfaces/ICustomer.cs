@@ -14,7 +14,7 @@ namespace OnlineShopping
         string getPhoneNumber();
         PurchaseHistory getPurchaseHistory();
         bool PurchaseCurrentBasket();
-        void removeItemFromBasket(Item item);
+        void removeItemFromBasket(Item item, uint count);
         void setCurrentBasket(Basket basket);
         void setDeliveryAddress(string address);
         void setEmailAddress(string emailAddress);

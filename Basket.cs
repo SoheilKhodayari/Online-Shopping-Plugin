@@ -22,11 +22,6 @@ namespace OnlineShopping
             this._Items = new List<Item>();
             this._PurchaseTime = DateTime.Today.AddYears(-200); 
 
-            /* Warning: null DateTime would throw weird Exceptions in EF!
-             * More on here:
-             * http://stackoverflow.com/questions/7938384/an-error-occurred-while-saving-entities-that-do-not-expose-foreign-key-propertie
-             * 
-             */
         }
         public Basket(string id, List<Item> items)
         {
@@ -83,14 +78,10 @@ namespace OnlineShopping
             Shop shop = Shop.getInstance();
             if (shop.checkExistingItemStock(item, 0)) 
             {
-                /* if the item merely exists on shop, whether have enough count or not */
-
                 if(this._Items.Any(i=> i.getSerialNumber().Equals(item.getSerialNumber())))
                 {
-                    /* if the basket contains the cloned item */
                     if(item.getCount()>count)
                     {
-                        /* if the basket contains more number of items than needs to be deleted */
                         item.decCount(count);
                     }
                     else

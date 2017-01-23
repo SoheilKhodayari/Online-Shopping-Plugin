@@ -9,7 +9,7 @@ namespace OnlineShopping.Interfaces
     public interface IMatchStrategy
     {
         bool matches(ItemSpec thisSpec, ItemSpec otherSpec);
-        bool strictlyMatches(ItemSpec thisSpec, ItemSpec otherSpec);
+        bool strictlyMatches(ItemSpec thisSpec, ItemSpec otherSpec);    
 
     }
 }
