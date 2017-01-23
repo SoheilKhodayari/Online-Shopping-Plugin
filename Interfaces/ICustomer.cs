@@ -4,7 +4,7 @@ namespace OnlineShopping
 {
     public interface ICustomer
     {
-        void addItemToBasket(Item item);
+        void addItemToBasket(Item item, uint count=1);
         Basket getCurrentBasket();
         string getDeliveryAddress();
         string getEmailAddress();

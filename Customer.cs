@@ -104,13 +104,13 @@ namespace OnlineShopping
         {
             this._CurrentBasket = basket;
         }
-        public void addItemToBasket(Item item)
+        public void addItemToBasket(Item item, uint count=1)
         {
             if(this._CurrentBasket == null)
             {
                 this._CurrentBasket = new Basket(Guid.NewGuid().ToString());
             }
-            this._CurrentBasket.addItem(item);
+            this._CurrentBasket.addItem(item, count);
         }
         public void removeItemFromBasket(Item item)
         {

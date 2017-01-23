@@ -118,7 +118,7 @@ namespace OnlineShopping
             this._Categories = new List<ICategory>();
         }
 
-        public List<ICategory> getChildren(){
+        public List<ICategory> getCategories(){
             return this._Categories;
         }
 
