@@ -2,7 +2,7 @@
 - Developed by C# .NET 4.5 and Entity Framework 6+ .
 
 ## Framework Class Diagram
-![class diagram](http://uupload.ir/files/o3fl_onlineshoppingframework.jpg)
+![class diagram](http://www.upsara.com/images/0cip_onlineshoppingframework.jpg)
 
 
 ## Framework Usage Instructions
