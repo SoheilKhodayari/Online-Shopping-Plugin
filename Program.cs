@@ -141,9 +141,9 @@ namespace OnlineShopping
             db.SaveChanges();
 
             Item laptopItem1 = new Item(Guid.NewGuid().ToString(), "Acer-Aspire-V571-G", 2500050, 10, laptopItemSpec1);
-            Item laptopItem2 = new Item(Guid.NewGuid().ToString(), "Lenovo-Ideapad-310-K", 3100000, 4, laptopItemSpec1);
+            Item laptopItem2 = new Item(Guid.NewGuid().ToString(), "Lenovo-Ideapad-310-K", 3100000, 4, laptopItemSpec2);
             Item mobileItem1 = new Item(Guid.NewGuid().ToString(), "Samsung-Galaxy-Note-7", 2400000, 5, mobileItemSpec1);
-            Item mobileItem2 = new Item(Guid.NewGuid().ToString(), "Huawei-P8-DualSim", 980000, 5, mobileItemSpec1);
+            Item mobileItem2 = new Item(Guid.NewGuid().ToString(), "Huawei-P8-DualSim", 980000, 5, mobileItemSpec2);
 
             db.Items.Add(laptopItem1);
             db.Items.Add(laptopItem2);
@@ -159,16 +159,11 @@ namespace OnlineShopping
             digitalProductsCategory.addCategory(mobileCategory);
             shop.addMainCategory(digitalProductsCategory);
 
-            //db.Categories.Add(mobileCategory);
-            //db.Categories.Add(laptopCategory);
-            //db.Categories.Add(digitalProductsCategory);
-            //db.Shops.Add(shop);
-            //db.SaveChanges();
-            if(shop.checkExistingItemStock(mobileItem1, 1))
-            {
-                Console.WriteLine("this is nhggubghvhgvhgv");
-            }
-
+            db.Categories.Add(mobileCategory);
+            db.Categories.Add(laptopCategory);
+            db.Categories.Add(digitalProductsCategory);
+            db.Shops.Add(shop);
+            db.SaveChanges();
 
 
             Basket basket1 = new Basket(Guid.NewGuid().ToString());
@@ -220,58 +215,65 @@ namespace OnlineShopping
                 Console.WriteLine("Message: Could not buy Item!");
             }
 
+            Dictionary<string,Object> searchDict = new Dictionary<string,Object>();
+            searchDict.Add("color","black");
+            ItemSpec searchSpec = new ItemSpec(searchDict);
+            IList<Item> searchResults = shop.search(searchSpec);
+            foreach(var item in searchResults)
+            {
+                Console.WriteLine(item.getName());
+            }
 
 
-            //var LaptopItemSpec1 = db.ItemSpecs.Where(i => i._Id == 25).FirstOrDefault();
-            //var LaptopItemSpec2 = db.ItemSpecs.Where(i => i._Id == 26).FirstOrDefault();
-            //var mobileItemSpec1 = db.ItemSpecs.Where(i => i._Id == 27).FirstOrDefault();
-            //var mobileItemSpec2 = db.ItemSpecs.Where(i => i._Id == 28).FirstOrDefault();
+
+            var l1 = db.ItemSpecs.ToList()[0];
+            var l2 = db.ItemSpecs.ToList()[1];
+            var m1 = db.ItemSpecs.ToList()[2];
+            var m2 = db.ItemSpecs.ToList()[3];
 
 
 
-            //if (mobileItemSpec1.matches(mobileItemSpec2))
-            //{
-            //    Console.WriteLine("true");
-            //}
-            //if (!mobileItemSpec1.strictlyMatches(mobileItemSpec2))
-            //{
-            //    Console.WriteLine("true");
-            //}
+            if (m1.matches(m2))
+            {
+                Console.WriteLine("true");
+            }
+            if (!l1.strictlyMatches(l2))
+            {
+                Console.WriteLine("true");
+            }
 
 
-            //Dictionary<string, object> sim;
-            //sim = mobileItemSpec2.getSameProperties(mobileItemSpec2);
-            //foreach (KeyValuePair<string, object> kvp in sim)
-            //{
-            //    Console.WriteLine(string.Format("Key = {0}, Value = {1}", kvp.Key, kvp.Value));
-            //}
+            Dictionary<string, object> sim;
+            sim = m2.getSameProperties(m1);
+            foreach (KeyValuePair<string, object> kvp in sim)
+            {
+                Console.WriteLine(string.Format("Key = {0}, Value = {1}", kvp.Key, kvp.Value));
+            }
 
-            //Console.WriteLine("------Item1------");
-            //foreach (KeyValuePair<string, object> kvp in LaptopItemSpec1.getProperties())
-            //{
-            //    Console.WriteLine(string.Format("Key = {0}, Value = {1}", kvp.Key, kvp.Value));
-            //}
-            //Console.WriteLine("------Item2------");
-            //foreach (KeyValuePair<string, object> kvp in LaptopItemSpec2.getProperties())
-            //{
-            //    Console.WriteLine(string.Format("Key = {0}, Value = {1}", kvp.Key, kvp.Value));
-            //}
+            Console.WriteLine("------Item1------");
+            foreach (KeyValuePair<string, object> kvp in l1.getProperties())
+            {
+                Console.WriteLine(string.Format("Key = {0}, Value = {1}", kvp.Key, kvp.Value));
+            }
+            Console.WriteLine("------Item2------");
+            foreach (KeyValuePair<string, object> kvp in l2.getProperties())
+            {
+                Console.WriteLine(string.Format("Key = {0}, Value = {1}", kvp.Key, kvp.Value));
+            }
 
-            //Tuple<Dictionary<string, Object>, Dictionary<string, Object>> diff;
-            //diff = LaptopItemSpec2.getDifferentProperties(LaptopItemSpec1);
-            //Console.WriteLine("------diff1------");
-            //foreach (KeyValuePair<string, object> kvp in diff.Item1)
-            //{
-            //    Console.WriteLine(string.Format("Key = {0}, Value = {1}", kvp.Key, kvp.Value));
-            //}
-            //Console.WriteLine("------diff2------");
-            //foreach (KeyValuePair<string, object> kvp in diff.Item2)
-            //{
-            //    Console.WriteLine(string.Format("Key = {0}, Value = {1}", kvp.Key, kvp.Value));
-            //}
+            Tuple<Dictionary<string, Object>, Dictionary<string, Object>> diff;
+            diff = l2.getDifferentProperties(l1);
+            Console.WriteLine("------diff1------");
+            foreach (KeyValuePair<string, object> kvp in diff.Item1)
+            {
+                Console.WriteLine(string.Format("Key = {0}, Value = {1}", kvp.Key, kvp.Value));
+            }
+            Console.WriteLine("------diff2------");
+            foreach (KeyValuePair<string, object> kvp in diff.Item2)
+            {
+                Console.WriteLine(string.Format("Key = {0}, Value = {1}", kvp.Key, kvp.Value));
+            }
 
-            ItemSpec sad = db.ItemSpecs.Where(i => i._Id == 25).FirstOrDefault();
-            sad.getProperties();
 
             Console.WriteLine("Finished!");
             Console.ReadLine();

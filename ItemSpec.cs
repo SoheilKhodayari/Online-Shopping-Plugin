@@ -15,120 +15,96 @@ namespace OnlineShopping
     {
         [Key]
         public int _Id {get; set;}
-
-        [NotMapped]
-        private Dictionary<string, Object> _Properties;
-
-        public string _PropertiesDB { get; set; }
-
+        public string _SerializedProperties { get; set; }
         public ItemSpec()
         {
-            this._Properties = new Dictionary<string, Object>();
-            this.syncPropertiesToSerializations();
 
         }
         public ItemSpec(Dictionary<string,Object> properties)
         {
-            this._Properties = properties;
-            this.syncPropertiesToSerializations();
-        }
-
-        private void syncPropertiesFromSerializations()
-        {
-            if(_PropertiesDB != null)
-            {
-                this._Properties = JsonConvert.DeserializeObject<Dictionary<string, Object>>(_PropertiesDB);
-            }
-
-        }
-        private void syncPropertiesToSerializations()
-        {
-            this._PropertiesDB = JsonConvert.SerializeObject(this._Properties);
+            this._SerializedProperties = JsonConvert.SerializeObject(properties);
         }
 
         public bool addPropertyIfNotExists(string key, Object value)
         {
-            if(!this._Properties.ContainsKey(key))
+            Dictionary<string, Object> properties = this.getProperties();
+            if(!properties.ContainsKey(key))
             {
-                this._Properties.Add(key, value);
-                this.syncPropertiesToSerializations();
+                properties.Add(key, value);
+                this._SerializedProperties = JsonConvert.SerializeObject(properties);
                 return true;
             }
             return false;
         }
         public bool setProperty(string key, Object value)
         {
-            if (this._Properties.ContainsKey(key))
+            Dictionary<string, Object> properties = this.getProperties();
+            if (properties.ContainsKey(key))
             {
-                this._Properties[key] = value;
-                this.syncPropertiesToSerializations();
+                properties[key] = value;
+                this._SerializedProperties = JsonConvert.SerializeObject(properties);
                 return true;
             }
             return false;
         }
         public Object getProperty(string key)
         {
-            this.syncPropertiesFromSerializations();
-            if (this._Properties.ContainsKey(key))
+            Dictionary<string, Object> properties = this.getProperties();
+            if (properties.ContainsKey(key))
             {
-                return this._Properties[key];
+                return properties[key];
             }
             return null;
         }
 
         public Dictionary<string, Object> getProperties()
-        {
-            this.syncPropertiesFromSerializations();
-            return this._Properties;
+        {   
+            if(this._SerializedProperties != null)
+            {
+                Dictionary<string, Object> properties = JsonConvert.DeserializeObject<Dictionary<string, Object>>(_SerializedProperties);
+                return properties;
+            }
+            return new Dictionary<string, Object>();
         }
 
         public bool containsProperty(string key)
         {
-            this.syncPropertiesFromSerializations();
-            return this._Properties.ContainsKey(key);
+            return this.getProperties().ContainsKey(key);
         }
 
         public bool hasEqualProperty(string propertyName, ItemSpec otherSpec)
         {
-            //this.syncPropertiesFromSerializations(); // consider omitting this
-            //otherSpec.syncPropertiesFromSerializations();
-
             if (otherSpec.containsProperty(propertyName) 
-                && this._Properties[propertyName].Equals(otherSpec.getProperty(propertyName)))
+                && this.getProperties()[propertyName].Equals(otherSpec.getProperty(propertyName)))
                 return true;
             return false;
         }
 
         public bool matches(ItemSpec otherSpec)
         {
-            this.syncPropertiesFromSerializations();
-            otherSpec.syncPropertiesFromSerializations();
-
-            foreach (var property in this._Properties.ToArray())
+            Dictionary<string, Object> properties = this.getProperties();
+            foreach (var property in properties.ToArray())
             {
                 string propertyName = property.Key;
                 if (!otherSpec.containsProperty(propertyName))
                 {
                     continue;
                 }
-                else if(!this._Properties[propertyName].Equals(otherSpec.getProperty(propertyName)))
+                else if(!properties[propertyName].Equals(otherSpec.getProperty(propertyName)))
                 {
                     return false;
                 }
             }
-
             return true;
         }
 
         public bool strictlyMatches(ItemSpec otherSpec)
         {
-            this.syncPropertiesFromSerializations();
-            otherSpec.syncPropertiesFromSerializations();
-
-            foreach (var property in this._Properties.ToArray())
+            Dictionary<string, Object> properties = this.getProperties();
+            foreach (var property in properties.ToArray())
             {
                 string propertyName = property.Key;
-                if (!this._Properties[propertyName].Equals(otherSpec.getProperty(propertyName)))
+                if (!properties[propertyName].Equals(otherSpec.getProperty(propertyName)))
                 {
                     return false;
                 }
@@ -139,30 +115,27 @@ namespace OnlineShopping
 
         public Dictionary<string, Object> getSameProperties(ItemSpec otherSpec)
         {
-            this.syncPropertiesFromSerializations();
-            otherSpec.syncPropertiesFromSerializations();
-
+            Dictionary<string, Object> properties = this.getProperties();
             Dictionary<string, Object> sameProperties = new Dictionary<string, Object>();
-            foreach (var property in this._Properties.ToArray())
+            foreach (var property in properties.ToArray())
             {
                 string propertyName = property.Key;
                 if(hasEqualProperty(propertyName, otherSpec))
                 {
-                    sameProperties.Add(propertyName, this._Properties[propertyName]);
+                    sameProperties.Add(propertyName, properties[propertyName]);
                 }
             }
             return sameProperties;
         }
         public Tuple<Dictionary<string, Object>, Dictionary<string, Object>> getDifferentProperties(ItemSpec otherSpec)
         {
-            this.syncPropertiesFromSerializations();
-            otherSpec.syncPropertiesFromSerializations();
+            Dictionary<string, Object> properties = this.getProperties();
 
             string propertyName;
             Dictionary<string, Object> diff = new Dictionary<string, Object>();
             Dictionary<string, Object> otherDiff = new Dictionary<string, Object>();
             Tuple<Dictionary<string, Object>,Dictionary<string, Object>> differences;
-            foreach (var property in this._Properties.ToArray())
+            foreach (var property in properties.ToArray())
             {
                 propertyName = property.Key;
                 if (!hasEqualProperty(propertyName, otherSpec))
@@ -171,13 +144,13 @@ namespace OnlineShopping
                     {
                         otherDiff.Add(propertyName, otherSpec.getProperty(propertyName));
                     }
-                    diff.Add(propertyName, this._Properties[propertyName]);   
+                    diff.Add(propertyName, properties[propertyName]);   
                 }
             }
             foreach (var property in otherSpec.getProperties().ToArray())
             {
                 propertyName = property.Key;
-                if (!this._Properties.ContainsKey(propertyName))
+                if (!properties.ContainsKey(propertyName))
                 {
                     otherDiff.Add(propertyName, otherSpec.getProperty(propertyName));
                 }

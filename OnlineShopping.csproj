@@ -65,9 +65,9 @@
     <Compile Include="Interfaces\IItemSpec.cs" />
     <Compile Include="Interfaces\IPurchaseHistory.cs" />
     <Compile Include="Interfaces\IShop.cs" />
-    <Compile Include="Migrations\201701222033289_db_creation_new_fix_bugs.cs" />
-    <Compile Include="Migrations\201701222033289_db_creation_new_fix_bugs.Designer.cs">
-      <DependentUpon>201701222033289_db_creation_new_fix_bugs.cs</DependentUpon>
+    <Compile Include="Migrations\201701230745344_db_new_migration_final.cs" />
+    <Compile Include="Migrations\201701230745344_db_new_migration_final.Designer.cs">
+      <DependentUpon>201701230745344_db_new_migration_final.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Shop.cs" />
@@ -84,8 +84,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201701222033289_db_creation_new_fix_bugs.resx">
-      <DependentUpon>201701222033289_db_creation_new_fix_bugs.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201701230745344_db_new_migration_final.resx">
+      <DependentUpon>201701230745344_db_new_migration_final.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
