@@ -76,30 +76,6 @@ namespace OnlineShopping
             //test t2 = obj.ToObject<test>();
            // Console.WriteLine(t2.name);
 
-            //using(var db = new AppContext())
-            //{
-            //    Shop shop = Shop.getInstance();
-            //    shop.setName("test-store");
-            //    shop.setId("test-store-id");
-            //    ItemCategory computerCategory = new ItemCategory("Computer");
-            //    ItemSpec spec = new ItemSpec();
-            //    spec.addPropertyIfNotExists("color", "black");
-            //    spec.addPropertyIfNotExists("weight", "2.7kg");
-            //    spec.SyncPropertiesToSerializations();
-            //    db.ItemSpecs.Add(spec);
-            //    Item item = new Item("sf2123122","E571G-Acer-Aspire",500,5,spec);
-            //    //db.Items.Add(item);
-
-            //    //computerCategory._Items.Add(item);
-            //    computerCategory.addItem(item);
-            //    db.Categories.Add(computerCategory);
-
-            //    shop._MainCategories.Add(computerCategory);
-            //    db.Shops.Add(shop);
-
-            //    db.SaveChanges();
-            //}
-
             //catch (DbEntityValidationException e)
             //{
             //    foreach (var eve in e.EntityValidationErrors)
@@ -114,6 +90,9 @@ namespace OnlineShopping
             //    }
             //   // throw;
             //}
+
+
+            // --------------------------------------simple test---------------------------------//
             var db = AppContext.getInstance();
 
             Shop shop = Shop.getInstance();
@@ -180,12 +159,15 @@ namespace OnlineShopping
             digitalProductsCategory.addCategory(mobileCategory);
             shop.addMainCategory(digitalProductsCategory);
 
-            db.Categories.Add(mobileCategory);
-            db.Categories.Add(laptopCategory);
-            db.Categories.Add(digitalProductsCategory);
-            db.Shops.Add(shop);
-            db.SaveChanges();
-
+            //db.Categories.Add(mobileCategory);
+            //db.Categories.Add(laptopCategory);
+            //db.Categories.Add(digitalProductsCategory);
+            //db.Shops.Add(shop);
+            //db.SaveChanges();
+            if(shop.checkExistingItemStock(mobileItem1, 1))
+            {
+                Console.WriteLine("this is nhggubghvhgvhgv");
+            }
 
 
 
@@ -240,8 +222,62 @@ namespace OnlineShopping
 
 
 
+            //var LaptopItemSpec1 = db.ItemSpecs.Where(i => i._Id == 25).FirstOrDefault();
+            //var LaptopItemSpec2 = db.ItemSpecs.Where(i => i._Id == 26).FirstOrDefault();
+            //var mobileItemSpec1 = db.ItemSpecs.Where(i => i._Id == 27).FirstOrDefault();
+            //var mobileItemSpec2 = db.ItemSpecs.Where(i => i._Id == 28).FirstOrDefault();
+
+
+
+            //if (mobileItemSpec1.matches(mobileItemSpec2))
+            //{
+            //    Console.WriteLine("true");
+            //}
+            //if (!mobileItemSpec1.strictlyMatches(mobileItemSpec2))
+            //{
+            //    Console.WriteLine("true");
+            //}
+
+
+            //Dictionary<string, object> sim;
+            //sim = mobileItemSpec2.getSameProperties(mobileItemSpec2);
+            //foreach (KeyValuePair<string, object> kvp in sim)
+            //{
+            //    Console.WriteLine(string.Format("Key = {0}, Value = {1}", kvp.Key, kvp.Value));
+            //}
+
+            //Console.WriteLine("------Item1------");
+            //foreach (KeyValuePair<string, object> kvp in LaptopItemSpec1.getProperties())
+            //{
+            //    Console.WriteLine(string.Format("Key = {0}, Value = {1}", kvp.Key, kvp.Value));
+            //}
+            //Console.WriteLine("------Item2------");
+            //foreach (KeyValuePair<string, object> kvp in LaptopItemSpec2.getProperties())
+            //{
+            //    Console.WriteLine(string.Format("Key = {0}, Value = {1}", kvp.Key, kvp.Value));
+            //}
+
+            //Tuple<Dictionary<string, Object>, Dictionary<string, Object>> diff;
+            //diff = LaptopItemSpec2.getDifferentProperties(LaptopItemSpec1);
+            //Console.WriteLine("------diff1------");
+            //foreach (KeyValuePair<string, object> kvp in diff.Item1)
+            //{
+            //    Console.WriteLine(string.Format("Key = {0}, Value = {1}", kvp.Key, kvp.Value));
+            //}
+            //Console.WriteLine("------diff2------");
+            //foreach (KeyValuePair<string, object> kvp in diff.Item2)
+            //{
+            //    Console.WriteLine(string.Format("Key = {0}, Value = {1}", kvp.Key, kvp.Value));
+            //}
+
+            ItemSpec sad = db.ItemSpecs.Where(i => i._Id == 25).FirstOrDefault();
+            sad.getProperties();
+
             Console.WriteLine("Finished!");
             Console.ReadLine();
+
+
         }
+
     }
 }

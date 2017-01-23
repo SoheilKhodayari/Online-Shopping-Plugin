@@ -17,7 +17,7 @@ namespace OnlineShopping
         public int _Id {get; set;}
 
         [NotMapped]
-        public Dictionary<string, Object> _Properties;
+        private Dictionary<string, Object> _Properties;
 
         public string _PropertiesDB { get; set; }
 
@@ -33,19 +33,21 @@ namespace OnlineShopping
             this.syncPropertiesToSerializations();
         }
 
-        // consider changing these two to private or not.
-        public void syncPropertiesFromSerializations()
+        private void syncPropertiesFromSerializations()
         {
-            this._Properties = JsonConvert.DeserializeObject<Dictionary<string, Object>>(_PropertiesDB);
+            if(_PropertiesDB != null)
+            {
+                this._Properties = JsonConvert.DeserializeObject<Dictionary<string, Object>>(_PropertiesDB);
+            }
+
         }
-        public void syncPropertiesToSerializations()
+        private void syncPropertiesToSerializations()
         {
             this._PropertiesDB = JsonConvert.SerializeObject(this._Properties);
         }
 
         public bool addPropertyIfNotExists(string key, Object value)
         {
-            this.syncPropertiesFromSerializations();
             if(!this._Properties.ContainsKey(key))
             {
                 this._Properties.Add(key, value);
@@ -88,8 +90,8 @@ namespace OnlineShopping
 
         public bool hasEqualProperty(string propertyName, ItemSpec otherSpec)
         {
-            this.syncPropertiesFromSerializations();
-            otherSpec.syncPropertiesFromSerializations();
+            //this.syncPropertiesFromSerializations(); // consider omitting this
+            //otherSpec.syncPropertiesFromSerializations();
 
             if (otherSpec.containsProperty(propertyName) 
                 && this._Properties[propertyName].Equals(otherSpec.getProperty(propertyName)))
@@ -156,21 +158,26 @@ namespace OnlineShopping
             this.syncPropertiesFromSerializations();
             otherSpec.syncPropertiesFromSerializations();
 
+            string propertyName;
             Dictionary<string, Object> diff = new Dictionary<string, Object>();
             Dictionary<string, Object> otherDiff = new Dictionary<string, Object>();
             Tuple<Dictionary<string, Object>,Dictionary<string, Object>> differences;
             foreach (var property in this._Properties.ToArray())
             {
-                string propertyName = property.Key;
+                propertyName = property.Key;
                 if (!hasEqualProperty(propertyName, otherSpec))
                 {
-                    diff.Add(propertyName, this._Properties[propertyName]);
+                    if (otherSpec.getProperties().ContainsKey(propertyName))
+                    {
+                        otherDiff.Add(propertyName, otherSpec.getProperty(propertyName));
+                    }
+                    diff.Add(propertyName, this._Properties[propertyName]);   
                 }
             }
             foreach (var property in otherSpec.getProperties().ToArray())
             {
-                string propertyName = property.Key;
-                if (!hasEqualProperty(propertyName, this))
+                propertyName = property.Key;
+                if (!this._Properties.ContainsKey(propertyName))
                 {
                     otherDiff.Add(propertyName, otherSpec.getProperty(propertyName));
                 }

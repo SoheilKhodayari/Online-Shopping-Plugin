@@ -149,15 +149,11 @@ namespace OnlineShopping
             {
                 this._PurchaseHistory = new PurchaseHistory(Guid.NewGuid().ToString());
                 this._PurchaseHistory.addPurchaseRecord(this._CurrentBasket);
-                var db = AppContext.getInstance();
-                db.PurchaseHistories.Add(this._PurchaseHistory);
-                db.SaveChanges();
             }
             else
             {
                 this._PurchaseHistory.addPurchaseRecord(this._CurrentBasket);
             }
-            //this._CurrentBasket = new Basket(null);
             this._CurrentBasket = null;
             
             return true;
