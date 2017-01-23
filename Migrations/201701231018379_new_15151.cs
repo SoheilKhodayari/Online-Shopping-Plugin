@@ -3,7 +3,7 @@ namespace OnlineShopping.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class db_new_migration_final : DbMigration
+    public partial class new_15151 : DbMigration
     {
         public override void Up()
         {

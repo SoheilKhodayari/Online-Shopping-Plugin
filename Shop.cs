@@ -87,24 +87,6 @@ namespace OnlineShopping
             return existingItem.getCount() >= count;
             
         }
-        //public bool updateExistingItemStock(Item item, uint count, bool inc = true)
-        //{
-        //    if (inc)
-        //    {
-        //        List<Item> items = this.getAllItems();
-        //        Item existingItem = items.Find(i => i.getSerialNumber() == item.getSerialNumber());
-        //        if (!existingItem.Equals(null))
-        //        {
-        //            item.incCount(count);
-        //        }
-        //    }
-        //    else if(this.checkExistingItemStock(item, count))
-        //    {
-        //        item.decCount(count);
-        //        return true;
-        //    }
-        //    return false;
-        //}
 
         public bool updateExistingItemStock(Item item, uint count, bool inc = true)
         {
@@ -114,7 +96,7 @@ namespace OnlineShopping
                 Item existingItem = items.Find(i => i.getSerialNumber() == item.getSerialNumber());
                 if (!existingItem.Equals(null))
                 {
-                    existingItem.incCount(count); // Bug Fixed: changed from item to existingItem
+                    existingItem.incCount(count);
                     return true;
                 }
             }
@@ -124,7 +106,7 @@ namespace OnlineShopping
                 Item existingItem = items.Find(i => i.getSerialNumber() == item.getSerialNumber());
                 if (!existingItem.Equals(null))
                 {
-                    existingItem.decCount(count);  // IMPORTANT: decrement the actual item count, not the cloned one!
+                    existingItem.decCount(count);  
                     return true;
                 }
             }
@@ -161,16 +143,29 @@ namespace OnlineShopping
         public IList<Item> search(ItemSpec spec)
         {
             List<Item> result = new List<Item>();
-            foreach(var cat in this._MainCategories)
+            var db = AppContext.getInstance();
+            List<ICategory> mainCategories;
+            try
             {
-                result.AddRange(cat.search(spec));
+                 mainCategories = db.Categories.Where(c => c._Level == _FirstLevel).ToList();
             }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            
+            //foreach (var cat in mainCategories)
+            //{
+            //    result.AddRange(cat.search(spec));
+            //}
             return result.AsReadOnly();
         }
         public IList<Item> strictSearch(ItemSpec spec)
         {
             List<Item> result = new List<Item>();
-            foreach (var cat in this._MainCategories)
+            var db = AppContext.getInstance();
+            var mainCategories = db.Categories.Where(c => c._Level == _FirstLevel).ToList();
+            foreach (var cat in mainCategories)
             {
                 result.AddRange(cat.search(spec));
             }

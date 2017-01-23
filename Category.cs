@@ -34,11 +34,17 @@ namespace OnlineShopping
         {
             this._Level = level;
         }
+        internal ICategory()
+        {
+
+        }
 
         public IList<Item> search(ItemSpec spec)
         {
             List<Item> result = new List<Item>();
-            foreach (var item in this.getItems())
+            var db = AppContext.getInstance();
+            List<Item> allItems = db.Categories.Where(c => c._Id == this._Id).FirstOrDefault().getItems();
+            foreach (var item in allItems)
             {
                 if (spec.matches(item.getSpec()))
                 {
@@ -50,7 +56,9 @@ namespace OnlineShopping
         public IList<Item> strictSearch(ItemSpec spec)
         {
             List<Item> result = new List<Item>();
-            foreach (var item in this.getItems())
+            var db = AppContext.getInstance();
+            List<Item> allItems = db.Categories.Where(c => c._Id == this._Id).FirstOrDefault().getItems();
+            foreach (var item in allItems)
             {
                 if (spec.strictlyMatches(item.getSpec()))
                 {
@@ -70,6 +78,10 @@ namespace OnlineShopping
         {
             this._Name = name;
             this._Items = new List<Item>();
+        }
+        internal ItemCategory()
+        {
+
         }
 
         public override List<Item> getItems()
@@ -96,6 +108,10 @@ namespace OnlineShopping
     {
         public List<ICategory> _Categories { get; set; }
 
+        internal Category()
+        {
+
+        }
         public Category(string name)
         {
             this._Name = name;

@@ -8,6 +8,7 @@ using System.Data.Entity.Infrastructure;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Newtonsoft.Json;
+using OnlineShopping.Interfaces;
 
 namespace OnlineShopping
 {
@@ -16,13 +17,26 @@ namespace OnlineShopping
         [Key]
         public int _Id {get; set;}
         public string _SerializedProperties { get; set; }
+
+        [NotMapped]
+        protected IMatchStrategy _Matcher;
         public ItemSpec()
         {
-
+            this._Matcher = new ItemSpecMatcher();
         }
         public ItemSpec(Dictionary<string,Object> properties)
         {
             this._SerializedProperties = JsonConvert.SerializeObject(properties);
+            this._Matcher = new ItemSpecMatcher();
+        }
+
+        public IMatchStrategy getMatchStrategy()
+        {
+            return this._Matcher;
+        }
+        public void setMatchStrategy(IMatchStrategy matchStragery)
+        {
+            this._Matcher = matchStragery;
         }
 
         public bool addPropertyIfNotExists(string key, Object value)
@@ -82,35 +96,12 @@ namespace OnlineShopping
 
         public bool matches(ItemSpec otherSpec)
         {
-            Dictionary<string, Object> properties = this.getProperties();
-            foreach (var property in properties.ToArray())
-            {
-                string propertyName = property.Key;
-                if (!otherSpec.containsProperty(propertyName))
-                {
-                    continue;
-                }
-                else if(!properties[propertyName].Equals(otherSpec.getProperty(propertyName)))
-                {
-                    return false;
-                }
-            }
-            return true;
+            return this._Matcher.matches(this, otherSpec);
         }
 
         public bool strictlyMatches(ItemSpec otherSpec)
         {
-            Dictionary<string, Object> properties = this.getProperties();
-            foreach (var property in properties.ToArray())
-            {
-                string propertyName = property.Key;
-                if (!properties[propertyName].Equals(otherSpec.getProperty(propertyName)))
-                {
-                    return false;
-                }
-            }
-
-            return true;
+            return this._Matcher.strictlyMatches(this, otherSpec);
         }
 
         public Dictionary<string, Object> getSameProperties(ItemSpec otherSpec)

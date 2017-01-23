@@ -7,13 +7,13 @@ namespace OnlineShopping.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class db_new_migration_final : IMigrationMetadata
+    public sealed partial class new_15151 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(db_new_migration_final));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(new_15151));
         
         string IMigrationMetadata.Id
         {
-            get { return "201701230745344_db_new_migration_final"; }
+            get { return "201701231018379_new_15151"; }
         }
         
         string IMigrationMetadata.Source
