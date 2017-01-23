@@ -145,19 +145,13 @@ namespace OnlineShopping
             List<Item> result = new List<Item>();
             var db = AppContext.getInstance();
             List<ICategory> mainCategories;
-            try
-            {
-                 mainCategories = db.Categories.Where(c => c._Level == _FirstLevel).ToList();
-            }
-            catch(Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
             
-            //foreach (var cat in mainCategories)
-            //{
-            //    result.AddRange(cat.search(spec));
-            //}
+            mainCategories = db.Categories.Where(c => c._Level == _FirstLevel).ToList();
+
+            foreach (var cat in mainCategories)
+            {
+                result.AddRange(cat.search(spec));
+            }
             return result.AsReadOnly();
         }
         public IList<Item> strictSearch(ItemSpec spec)
