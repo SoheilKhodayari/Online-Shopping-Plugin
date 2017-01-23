@@ -106,10 +106,18 @@ namespace OnlineShopping
         }
         public void addItemToBasket(Item item)
         {
+            if(this._CurrentBasket == null)
+            {
+                this._CurrentBasket = new Basket(Guid.NewGuid().ToString());
+            }
             this._CurrentBasket.addItem(item);
         }
         public void removeItemFromBasket(Item item)
         {
+            if(this._CurrentBasket == null)
+            {
+                return;
+            }
             this._CurrentBasket.removeItem(item);
         }
         public PurchaseHistory getPurchaseHistory()
